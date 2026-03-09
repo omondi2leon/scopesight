@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "name": "ScopeSight Design System",
+    "description": "A minimalist, document-centric PRD generator application.",
+    "stack": {
+      "framework": "React",
+      "platform": "Electron",
+      "styling": "Tailwind CSS",
+      "icons": "Lucide React"
+    }
+  },
+  "tokens": {
+    "colors": {
+      "stone": {
+        "50": "#FBFBF9",
+        "100": "#F3F1ED",
+        "200": "#E8E6E1",
+        "300": "#D6D3D1",
+        "400": "#A8A29E",
+        "500": "#78716C",
+        "800": "#2A2A2A",
+        "900": "#1C1C1E"
+      },
+      "peach": {
+        "50": "#FFF5F0",
+        "100": "#FFEADD",
+        "200": "#FFD6C9",
+        "500": "#E08D79"
+      },
+      "sage": {
+        "100": "#D4E8D4",
+        "200": "#BFE0BF",
+        "500": "#71A171",
+        "800": "#2F422F"
+      },
+      "semantic": {
+        "background": {
+          "app": "#FBFBF9",
+          "paper": "#FFFFFF",
+          "panel": "rgba(255, 255, 255, 0.5)"
+        },
+        "text": {
+          "primary": "#1C1C1E",
+          "secondary": "#78716C",
+          "muted": "#A8A29E",
+          "accent": "#E08D79"
+        },
+        "border": {
+          "default": "rgba(232, 230, 225, 0.5)",
+          "active": "#E08D79"
+        }
+      }
+    },
+    "typography": {
+      "fontFamily": {
+        "sans": ["Inter", "sans-serif"],
+        "serif": ["Playfair Display", "Georgia", "serif"],
+        "mono": ["JetBrains Mono", "monospace"]
+      },
+      "usage": {
+        "headings": "font-serif text-stone-900",
+        "body": "font-sans text-stone-800",
+        "metadata": "font-sans text-[10px] uppercase tracking-widest font-bold",
+        "code": "font-mono"
+      }
+    },
+    "shadows": {
+      "soft": "0 20px 40px -10px rgba(0,0,0,0.05)",
+      "card": "0 2px 12px rgba(0,0,0,0.03)",
+      "float": "0 12px 32px rgba(0,0,0,0.08)",
+      "modal": "0 25px 50px -12px rgba(0, 0, 0, 0.15)"
+    },
+    "effects": {
+      "glass": "bg-white/50 backdrop-blur-sm",
+      "glassHeavy": "bg-white/80 backdrop-blur-md",
+      "transition": "transition-all duration-200 ease-in-out"
+    }
+  },
+  "components": {
+    "layout": {
+      "appShell": {
+        "className": "h-screen flex flex-col overflow-hidden text-stone-800 font-sans selection:bg-peach-200 selection:text-stone-900 bg-[#FBFBF9]"
+      },
+      "header": {
+        "className": "h-20 px-8 flex items-center justify-between bg-stone-50 border-b border-stone-200/50 z-20 drag-region",
+        "notes": "Include 'drag-region' for Electron window dragging."
+      },
+      "sidebar": {
+        "className": "w-[420px] flex flex-col border-r border-stone-200/60 bg-white/50 backdrop-blur-sm relative z-10 shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)]"
+      },
+      "mainCanvas": {
+        "className": "flex-1 bg-stone-100/50 relative flex flex-col items-center justify-start overflow-y-auto p-8 lg:p-12"
+      }
+    },
+    "paper": {
+      "container": {
+        "className": "w-full max-w-[800px] bg-white shadow-soft rounded-lg min-h-[1000px] p-16 relative border border-stone-100"
+      },
+      "marginLine": {
+        "className": "absolute left-6 top-0 bottom-0 w-px border-l border-dashed border-stone-200"
+      }
+    },
+    "buttons": {
+      "primary": {
+        "className": "px-6 py-1.5 bg-stone-900 text-white rounded-full text-sm font-medium shadow-lg shadow-stone-900/10 hover:bg-stone-800 transition-all active:scale-95"
+      },
+      "secondary": {
+        "className": "px-6 py-1.5 bg-white border border-stone-200 shadow-sm rounded-full text-sm font-medium text-stone-900 transition-all hover:bg-stone-50 active:scale-95"
+      },
+      "navItem": {
+        "base": "px-6 py-1.5 text-sm font-medium transition-all rounded-full active:scale-95",
+        "active": "bg-white shadow-sm text-stone-900",
+        "inactive": "text-stone-500 hover:text-stone-900"
+      },
+      "icon": {
+        "className": "w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-100 transition-colors text-stone-600 active:scale-95"
+      },
+      "selector": {
+        "base": "w-full text-left px-4 py-3 rounded-xl text-sm font-medium border transition-all flex justify-between items-center group active:scale-[0.98]",
+        "selected": "bg-gradient-to-r from-sage-100 to-white border-sage-200 text-sage-800 shadow-sm",
+        "unselected": "bg-white border-stone-200 text-stone-500 hover:border-stone-300"
+      }
+    },
+    "inputs": {
+      "chatArea": {
+        "container": "relative bg-peach-50 border border-peach-200 rounded-xl p-4 transition-all focus-within:ring-2 focus-within:ring-peach-200 focus-within:bg-white",
+        "textarea": "w-full bg-transparent border-none p-0 text-stone-700 placeholder-peach-500/40 font-serif text-lg focus:ring-0 resize-none outline-none"
+      },
+      "ghost": {
+        "className": "w-full bg-transparent border-none p-0 text-sm text-stone-600 placeholder-stone-400 font-mono leading-relaxed focus:ring-0 resize-none outline-none"
+      }
+    },
+    "status": {
+      "badge": {
+        "base": "text-[10px] px-1.5 py-0.5 rounded-full font-medium",
+        "neutral": "bg-stone-300 text-stone-600",
+        "success": "bg-green-100 text-green-700",
+        "warning": "bg-peach-100 text-peach-600"
+      },
+      "indicator": {
+        "container": "hidden lg:flex items-center gap-2 text-xs font-medium text-stone-400 px-3 py-1 bg-stone-100 rounded-lg border border-stone-200",
+        "dot": "w-2 h-2 rounded-full"
+      }
+    },
+    "logo": {
+      "container": "flex items-center gap-3",
+      "icon": "w-8 h-8 rounded-full bg-gradient-to-br from-stone-800 to-stone-600 flex items-center justify-center text-white font-serif italic font-bold",
+      "text": "font-semibold tracking-tight text-lg font-sans"
+    }
+  },
+  "animations": {
+    "keyframes": {
+      "modalIn": "opacity-0 translate-y-[10px] scale-95 -> opacity-100 translate-y-0 scale-100",
+      "checkPop": "scale-0 opacity-0 -> scale-100 opacity-100"
+    },
+    "classes": {
+      "pulse": "animate-pulse",
+      "clickFeedback": "active:scale-95 transition-transform duration-100"
+    }
+  }
+}

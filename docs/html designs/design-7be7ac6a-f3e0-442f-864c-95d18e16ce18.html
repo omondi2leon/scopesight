@@ -1,0 +1,547 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3" />
+    <title vid="4">PRD Generator - Variant Export</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <script vid="6">
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              mono: ['JetBrains Mono', 'monospace']
+            },
+            colors: {
+              stone: {
+                50: '#FBFBF9',
+                100: '#F3F1ED',
+                200: '#E8E6E1',
+                300: '#D6D3D1',
+                400: '#A8A29E',
+                500: '#78716C',
+                800: '#2A2A2A',
+                900: '#1C1C1E'
+              },
+              peach: {
+                50: '#FFF5F0',
+                100: '#FFEADD',
+                200: '#FFD6C9',
+                500: '#E08D79'
+              },
+              sage: {
+                100: '#D4E8D4',
+                200: '#BFE0BF',
+                500: '#71A171',
+                800: '#2F422F'
+              }
+            },
+            boxShadow: {
+              soft: '0 20px 40px -10px rgba(0,0,0,0.05)',
+              card: '0 2px 12px rgba(0,0,0,0.03)',
+              float: '0 12px 32px rgba(0,0,0,0.08)',
+              modal: '0 25px 50px -12px rgba(0, 0, 0, 0.15)'
+            }
+          }
+        }
+      }
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap"
+      rel="stylesheet"
+      vid="7"
+    />
+    <style vid="8">
+      body {
+        background-color: #fbfbf9;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .modal-enter {
+        animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      .success-check {
+        animation: checkPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      }
+      @keyframes checkPop {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="h-screen flex flex-col overflow-hidden text-stone-800 font-sans selection:bg-peach-200"
+    vid="9"
+  >
+    <header
+      class="h-20 px-8 flex items-center justify-between bg-stone-50 border-b border-stone-200/50 z-20 opacity-50 pointer-events-none"
+      vid="10"
+    >
+      <div class="flex items-center gap-12" vid="11">
+        <div class="flex items-center gap-3" vid="12">
+          <div
+            class="w-8 h-8 rounded-full bg-gradient-to-br from-stone-800 to-stone-600 flex items-center justify-center text-white font-serif italic font-bold"
+            vid="13"
+          >
+            V
+          </div>
+          <span class="font-semibold tracking-tight text-lg" vid="14"
+            >Variant<span class="text-stone-400 font-normal" vid="15">Editor</span></span
+          >
+        </div>
+        <nav class="hidden md:flex p-1 bg-stone-200/50 rounded-full" vid="16">
+          <button
+            class="px-6 py-1.5 bg-white shadow-sm rounded-full text-sm font-medium text-stone-900"
+            vid="17"
+          >
+            Editor
+          </button>
+          <button class="px-6 py-1.5 text-sm font-medium text-stone-500" vid="18">
+            History
+            <span
+              class="bg-stone-300 text-[10px] px-1.5 py-0.5 rounded-full text-stone-600"
+              vid="19"
+              >24</span
+            >
+          </button>
+          <button class="px-6 py-1.5 text-sm font-medium text-stone-500" vid="20">Settings</button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4" vid="21">
+        <div
+          class="hidden lg:flex items-center gap-2 text-xs font-medium text-stone-400 px-3 py-1 bg-stone-100 rounded-lg border border-stone-200"
+          vid="22"
+        >
+          <span class="w-2 h-2 rounded-full bg-green-400" vid="23"></span> System Operational
+        </div>
+        <div
+          class="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center text-stone-600"
+          vid="24"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            vid="25"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" vid="26"></path>
+          </svg>
+        </div>
+      </div>
+    </header>
+
+    <main
+      class="flex-1 flex overflow-hidden opacity-30 grayscale-[0.5] pointer-events-none"
+      vid="27"
+    >
+      <section
+        class="w-[420px] flex flex-col border-r border-stone-200/60 bg-white"
+        vid="28"
+      ></section>
+      <section
+        class="flex-1 bg-stone-100/50 flex flex-col items-center justify-start p-12"
+        vid="29"
+      >
+        <div
+          class="w-full max-w-[800px] bg-white shadow-soft rounded-lg min-h-[800px] p-16 border border-stone-100"
+          vid="30"
+        ></div>
+      </section>
+    </main>
+
+    <div
+      id="export-modal-overlay"
+      class="fixed inset-0 z-50 bg-stone-900/40 backdrop-blur-[2px] flex items-center justify-center p-6"
+      vid="31"
+    >
+      <div
+        id="export-card"
+        class="bg-white rounded-3xl shadow-modal w-full max-w-[540px] border border-stone-200/50 overflow-hidden modal-enter"
+        vid="32"
+      >
+        <div class="px-8 pt-8 pb-6 flex justify-between items-start" vid="33">
+          <div vid="34">
+            <h2 class="font-serif text-3xl text-stone-900" vid="35">Export Document</h2>
+            <p class="text-stone-500 text-sm mt-1" vid="36">User Dashboard 2.0 • v1.2.0</p>
+          </div>
+          <button
+            onclick="window.location.reload()"
+            class="w-10 h-10 rounded-full hover:bg-stone-100 flex items-center justify-center text-stone-400 transition-colors"
+            vid="37"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              vid="38"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" vid="39"></line>
+              <line x1="6" y1="6" x2="18" y2="18" vid="40"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="px-8 space-y-8 pb-10" vid="41">
+          <div vid="42">
+            <label
+              class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4"
+              vid="43"
+              >Select Format</label
+            >
+            <div class="grid grid-cols-3 gap-3" vid="44">
+              <button
+                class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-stone-900 bg-stone-50 text-stone-900 transition-all group"
+                vid="45"
+              >
+                <div
+                  class="w-10 h-10 rounded-xl bg-white border border-stone-200 flex items-center justify-center shadow-sm"
+                  vid="46"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="47"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      vid="48"
+                    ></path>
+                    <polyline points="14 2 14 8 20 8" vid="49"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13" vid="50"></line>
+                    <line x1="16" y1="17" x2="8" y2="17" vid="51"></line>
+                    <polyline points="10 9 9 9 8 9" vid="52"></polyline>
+                  </svg>
+                </div>
+                <span class="text-sm font-semibold" vid="53">Markdown</span>
+              </button>
+              <button
+                class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-stone-100 hover:border-stone-200 bg-white text-stone-500 transition-all group"
+                vid="54"
+              >
+                <div
+                  class="w-10 h-10 rounded-xl bg-white border border-stone-100 flex items-center justify-center"
+                  vid="55"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="56"
+                  >
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" vid="57"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9" vid="58"></line>
+                    <line x1="9" y1="21" x2="9" y2="9" vid="59"></line>
+                  </svg>
+                </div>
+                <span class="text-sm font-semibold" vid="60">Notion</span>
+              </button>
+              <button
+                class="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-stone-100 hover:border-stone-200 bg-white text-stone-500 transition-all group"
+                vid="61"
+              >
+                <div
+                  class="w-10 h-10 rounded-xl bg-white border border-stone-100 flex items-center justify-center"
+                  vid="62"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="63"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      vid="64"
+                    ></path>
+                    <polyline points="14 2 14 8 20 8" vid="65"></polyline>
+                    <path d="M9 15h3a2 2 0 1 0 0-4H9v6" vid="66"></path>
+                  </svg>
+                </div>
+                <span class="text-sm font-semibold" vid="67">PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <div vid="68">
+            <label
+              class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4"
+              vid="69"
+              >Destination</label
+            >
+            <div class="space-y-3" vid="70">
+              <button
+                onclick="handleExport('download')"
+                class="w-full group bg-white border border-stone-200 hover:border-stone-900 rounded-2xl p-4 flex items-center justify-between transition-all"
+                vid="71"
+              >
+                <div class="flex items-center gap-4" vid="72">
+                  <div
+                    class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-stone-900 group-hover:text-white transition-colors"
+                    vid="73"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      vid="74"
+                    >
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" vid="75"></path>
+                      <polyline points="7 10 12 15 17 10" vid="76"></polyline>
+                      <line x1="12" y1="15" x2="12" y2="3" vid="77"></line>
+                    </svg>
+                  </div>
+                  <div class="text-left" vid="78">
+                    <p class="text-sm font-semibold text-stone-900" vid="79">Download as File</p>
+                    <p class="text-xs text-stone-400" vid="80">Saves directly to your device</p>
+                  </div>
+                </div>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-stone-300 group-hover:text-stone-900"
+                  vid="81"
+                >
+                  <path d="M9 18l6-6-6-6" vid="82"></path>
+                </svg>
+              </button>
+
+              <button
+                onclick="handleExport('clipboard')"
+                class="w-full group bg-white border border-stone-200 hover:border-stone-900 rounded-2xl p-4 flex items-center justify-between transition-all"
+                vid="83"
+              >
+                <div class="flex items-center gap-4" vid="84">
+                  <div
+                    class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-stone-900 group-hover:text-white transition-colors"
+                    vid="85"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      vid="86"
+                    >
+                      <path
+                        d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                        vid="87"
+                      ></path>
+                      <rect x="8" y="2" width="8" height="4" rx="1" ry="1" vid="88"></rect>
+                    </svg>
+                  </div>
+                  <div class="text-left" vid="89">
+                    <p class="text-sm font-semibold text-stone-900" vid="90">Copy to Clipboard</p>
+                    <p class="text-xs text-stone-400" vid="91">Quickly paste anywhere</p>
+                  </div>
+                </div>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-stone-300 group-hover:text-stone-900"
+                  vid="92"
+                >
+                  <path d="M9 18l6-6-6-6" vid="93"></path>
+                </svg>
+              </button>
+
+              <button
+                onclick="handleExport('link')"
+                class="w-full group bg-white border border-stone-200 hover:border-stone-900 rounded-2xl p-4 flex items-center justify-between transition-all"
+                vid="94"
+              >
+                <div class="flex items-center gap-4" vid="95">
+                  <div
+                    class="w-10 h-10 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 group-hover:bg-stone-900 group-hover:text-white transition-colors"
+                    vid="96"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      vid="97"
+                    >
+                      <path
+                        d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                        vid="98"
+                      ></path>
+                      <path
+                        d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                        vid="99"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div class="text-left" vid="100">
+                    <p class="text-sm font-semibold text-stone-900" vid="101">Share Public Link</p>
+                    <p class="text-xs text-stone-400" vid="102">Create a view-only link</p>
+                  </div>
+                </div>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="text-stone-300 group-hover:text-stone-900"
+                  vid="103"
+                >
+                  <path d="M9 18l6-6-6-6" vid="104"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="bg-stone-50 px-8 py-5 border-t border-stone-100 flex items-center justify-between"
+          vid="105"
+        >
+          <span class="text-xs text-stone-400 italic" vid="106">Last exported 2 days ago</span>
+          <button
+            onclick="window.location.reload()"
+            class="text-sm font-medium text-stone-500 hover:text-stone-900"
+            vid="107"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="success-state"
+        class="hidden fixed inset-0 z-[60] flex items-center justify-center pointer-events-none"
+        vid="108"
+      >
+        <div
+          class="bg-stone-900 text-white px-8 py-10 rounded-3xl shadow-2xl flex flex-col items-center gap-4 text-center pointer-events-auto success-check"
+          vid="109"
+        >
+          <div
+            class="w-16 h-16 rounded-full bg-sage-500 flex items-center justify-center mb-2"
+            vid="110"
+          >
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              vid="111"
+            >
+              <polyline points="20 6 9 17 4 12" vid="112"></polyline>
+            </svg>
+          </div>
+          <div vid="113">
+            <h3 class="text-2xl font-serif" id="success-title" vid="114">Export Successful</h3>
+            <p class="text-stone-400 text-sm mt-1" id="success-message" vid="115">
+              Document has been saved to your downloads.
+            </p>
+          </div>
+          <button
+            onclick="window.location.reload()"
+            class="mt-4 px-6 py-2 bg-stone-800 hover:bg-stone-700 rounded-full text-sm font-medium transition-colors"
+            vid="116"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script vid="117">
+      function handleExport(type) {
+        const card = document.getElementById('export-card')
+        const success = document.getElementById('success-state')
+        const title = document.getElementById('success-title')
+        const msg = document.getElementById('success-message')
+
+        card.classList.add(
+          'opacity-0',
+          'scale-95',
+          'pointer-events-none',
+          'transition-all',
+          'duration-300'
+        )
+
+        if (type === 'clipboard') {
+          title.innerText = 'Copied to Clipboard'
+          msg.innerText = 'Markdown content is ready to paste.'
+        } else if (type === 'link') {
+          title.innerText = 'Link Created'
+          msg.innerText = 'Shared link has been copied to clipboard.'
+        } else {
+          title.innerText = 'Download Started'
+          msg.innerText = 'Your file is being prepared for download.'
+        }
+
+        setTimeout(() => {
+          success.classList.remove('hidden')
+        }, 200)
+      }
+
+      document.querySelectorAll('button').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          this.classList.add('scale-[0.98]')
+          setTimeout(() => this.classList.remove('scale-[0.98]'), 100)
+        })
+      })
+    </script>
+  </body>
+</html>

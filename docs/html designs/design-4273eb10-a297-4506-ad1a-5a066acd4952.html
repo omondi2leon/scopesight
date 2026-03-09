@@ -1,0 +1,631 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3" />
+    <title vid="4">PRD Generator - Variant</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <script vid="6">
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              mono: ['JetBrains Mono', 'monospace']
+            },
+            colors: {
+              stone: {
+                50: '#FBFBF9',
+                100: '#F3F1ED',
+                200: '#E8E6E1',
+                800: '#2A2A2A',
+                900: '#1C1C1E'
+              },
+              peach: {
+                50: '#FFF5F0',
+                100: '#FFEADD',
+                200: '#FFD6C9',
+                500: '#E08D79'
+              },
+              sage: {
+                100: '#D4E8D4',
+                200: '#BFE0BF',
+                800: '#2F422F'
+              }
+            },
+            boxShadow: {
+              soft: '0 20px 40px -10px rgba(0,0,0,0.05)',
+              card: '0 2px 12px rgba(0,0,0,0.03)',
+              float: '0 12px 32px rgba(0,0,0,0.08)'
+            }
+          }
+        }
+      }
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap"
+      rel="stylesheet"
+      vid="7"
+    />
+    <style vid="8">
+      body {
+        background-color: #fbfbf9;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .prose-content p {
+        margin-bottom: 1.25em;
+        line-height: 1.75;
+      }
+      .prose-content h1,
+      .prose-content h2 {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        line-height: 1.3;
+      }
+      .prose-content li {
+        margin-bottom: 0.5em;
+      }
+    </style>
+  </head>
+  <body
+    class="h-screen flex flex-col overflow-hidden text-stone-800 font-sans selection:bg-peach-200 selection:text-stone-900"
+    vid="9"
+  >
+    <header
+      class="h-20 px-8 flex items-center justify-between bg-stone-50 border-b border-stone-200/50 z-20"
+      vid="10"
+    >
+      <div class="flex items-center gap-12" vid="11">
+        <div class="flex items-center gap-3" vid="12">
+          <div
+            class="w-8 h-8 rounded-full bg-gradient-to-br from-stone-800 to-stone-600 flex items-center justify-center text-white font-serif italic font-bold"
+            vid="13"
+          >
+            V
+          </div>
+          <span class="font-semibold tracking-tight text-lg" vid="14"
+            >Variant<span class="text-stone-400 font-normal" vid="15">Editor</span></span
+          >
+        </div>
+
+        <nav class="hidden md:flex p-1 bg-stone-200/50 rounded-full" vid="16">
+          <button
+            class="px-6 py-1.5 bg-white shadow-sm rounded-full text-sm font-medium text-stone-900 transition-all"
+            vid="17"
+          >
+            Editor
+          </button>
+          <button
+            class="px-6 py-1.5 text-sm font-medium text-stone-500 hover:text-stone-900 transition-all flex items-center gap-1"
+            vid="18"
+          >
+            History
+            <span
+              class="bg-stone-300 text-[10px] px-1.5 py-0.5 rounded-full text-stone-600"
+              vid="19"
+              >24</span
+            >
+          </button>
+          <button
+            class="px-6 py-1.5 text-sm font-medium text-stone-500 hover:text-stone-900 transition-all"
+            vid="20"
+          >
+            Settings
+          </button>
+        </nav>
+      </div>
+
+      <div class="flex items-center gap-4" vid="21">
+        <div
+          class="hidden lg:flex items-center gap-2 text-xs font-medium text-stone-400 px-3 py-1 bg-stone-100 rounded-lg border border-stone-200"
+          vid="22"
+        >
+          <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse" vid="23"></span>
+          System Operational
+        </div>
+        <button
+          class="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-100 transition-colors text-stone-600"
+          vid="24"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            vid="25"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" vid="26"></path>
+          </svg>
+        </button>
+        <button
+          class="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center hover:bg-stone-800 transition-colors shadow-lg shadow-stone-900/10"
+          vid="27"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            vid="28"
+          >
+            <circle cx="12" cy="12" r="3" vid="29"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              vid="30"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden" vid="31">
+      <section
+        class="w-[420px] flex flex-col border-r border-stone-200/60 bg-white/50 backdrop-blur-sm relative z-10 shadow-[4px_0_24px_-12px_rgba(0,0,0,0.05)]"
+        vid="32"
+      >
+        <div class="flex-1 overflow-y-auto p-6 space-y-8 scrollbar-hide" vid="33">
+          <div class="group" vid="34">
+            <div class="flex items-center gap-3 mb-3" vid="35">
+              <div
+                class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-300 to-purple-200 flex items-center justify-center text-[10px] text-indigo-900 font-bold"
+                vid="36"
+              >
+                AI
+              </div>
+              <span class="text-[10px] font-bold tracking-widest text-stone-400 uppercase" vid="37"
+                >Requirement Analysis</span
+              >
+            </div>
+            <div class="pl-9" vid="38">
+              <p class="text-stone-800 text-lg font-serif leading-relaxed mb-4" vid="39">
+                I'm initializing the PRD for the user dashboard. Who is the primary persona we are
+                optimizing the layout for?
+              </p>
+              <div class="flex flex-wrap gap-2" vid="40">
+                <button
+                  class="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded-lg text-sm font-medium text-stone-600 transition-colors"
+                  vid="41"
+                >
+                  Admin Users
+                </button>
+                <button
+                  class="px-4 py-2 bg-sage-100 text-sage-800 ring-1 ring-sage-200 rounded-lg text-sm font-medium shadow-sm flex items-center gap-2"
+                  vid="42"
+                >
+                  <span class="w-1.5 h-1.5 rounded-full bg-sage-800" vid="43"></span>
+                  End Customers
+                </button>
+                <button
+                  class="px-4 py-2 bg-stone-100 hover:bg-stone-200 rounded-lg text-sm font-medium text-stone-600 transition-colors"
+                  vid="44"
+                >
+                  Support Staff
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="group" vid="45">
+            <div class="flex items-center gap-3 mb-3" vid="46">
+              <div
+                class="w-6 h-6 rounded-full bg-gradient-to-tr from-rose-200 to-orange-100 flex items-center justify-center text-[10px] text-rose-900 font-bold"
+                vid="47"
+              >
+                AI
+              </div>
+              <span class="text-[10px] font-bold tracking-widest text-stone-400 uppercase" vid="48"
+                >Feature Scope</span
+              >
+            </div>
+            <div class="pl-9" vid="49">
+              <p class="text-stone-800 text-lg font-serif leading-relaxed mb-4" vid="50">
+                Understood. For the End Customer view, should the analytics widget be real-time or
+                daily cached?
+              </p>
+              <div class="flex flex-col gap-2" vid="51">
+                <button
+                  class="w-full text-left px-4 py-3 bg-white border border-stone-200 rounded-xl text-sm font-medium text-stone-500 hover:border-stone-300 transition-all flex justify-between items-center group/btn"
+                  vid="52"
+                >
+                  Real-time (High Load)
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover/btn:opacity-100 text-stone-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="53"
+                  >
+                    <path d="M5 12h14m-7-7 7 7-7 7" vid="54"></path>
+                  </svg>
+                </button>
+                <button
+                  class="w-full text-left px-4 py-3 bg-gradient-to-r from-sage-100 to-white border border-sage-200 rounded-xl text-sm font-medium text-sage-800 shadow-sm flex justify-between items-center"
+                  vid="55"
+                >
+                  Daily Cache (Performant)
+                  <svg
+                    class="w-4 h-4 text-sage-800"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="56"
+                  >
+                    <polyline points="20 6 9 17 4 12" vid="57"></polyline>
+                  </svg>
+                </button>
+                <button
+                  class="w-full text-left px-4 py-3 bg-white border border-stone-200 rounded-xl text-sm font-medium text-stone-500 hover:border-stone-300 transition-all flex justify-between items-center group/btn"
+                  vid="58"
+                >
+                  On-demand request
+                  <svg
+                    class="w-4 h-4 opacity-0 group-hover/btn:opacity-100 text-stone-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    vid="59"
+                  >
+                    <path d="M5 12h14m-7-7 7 7-7 7" vid="60"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-32" vid="61"></div>
+        </div>
+
+        <div class="p-6 border-t border-stone-100 bg-white absolute bottom-0 w-full" vid="62">
+          <div class="relative group" vid="63">
+            <div
+              class="absolute -inset-1 bg-gradient-to-r from-peach-200 to-orange-100 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"
+              vid="64"
+            ></div>
+            <div
+              class="relative bg-peach-50 border border-peach-200 rounded-xl p-4 transition-all focus-within:ring-2 focus-within:ring-peach-200 focus-within:bg-white"
+              vid="65"
+            >
+              <div class="flex justify-between items-center mb-2" vid="66">
+                <label
+                  class="text-[10px] font-bold text-peach-500 uppercase tracking-widest"
+                  vid="67"
+                  >Additional Context</label
+                >
+                <span class="text-[10px] text-stone-400 font-medium" vid="68"
+                  >Shift + Enter for new line</span
+                >
+              </div>
+              <textarea
+                class="w-full bg-transparent border-none p-0 text-stone-700 placeholder-peach-500/40 font-serif text-lg focus:ring-0 resize-none h-12"
+                placeholder="Add specific details or constraints..."
+                vid="69"
+              ></textarea>
+              <div class="flex justify-end mt-2" vid="70">
+                <button
+                  class="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md"
+                  vid="71"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    vid="72"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" vid="73"></line>
+                    <line x1="5" y1="12" x2="19" y2="12" vid="74"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="flex-1 bg-stone-100/50 relative flex flex-col items-center justify-start overflow-y-auto p-8 lg:p-12"
+        vid="75"
+      >
+        <div
+          class="sticky top-0 mb-8 z-30 bg-white/80 backdrop-blur-md border border-stone-200/50 shadow-sm rounded-full px-2 py-1.5 flex gap-1"
+          vid="76"
+        >
+          <button
+            class="px-4 py-1.5 hover:bg-stone-100 rounded-full text-xs font-semibold text-stone-600 transition-colors"
+            vid="77"
+          >
+            Markdown
+          </button>
+          <button
+            class="px-4 py-1.5 hover:bg-stone-100 rounded-full text-xs font-semibold text-stone-600 transition-colors"
+            vid="78"
+          >
+            Notion
+          </button>
+          <button
+            class="px-4 py-1.5 hover:bg-stone-100 rounded-full text-xs font-semibold text-stone-600 transition-colors"
+            vid="79"
+          >
+            PDF
+          </button>
+          <div class="w-px h-4 bg-stone-200 my-auto mx-1" vid="80"></div>
+          <button
+            class="px-5 py-1.5 bg-stone-900 hover:bg-stone-800 text-white rounded-full text-xs font-semibold transition-colors shadow-lg shadow-stone-900/10 flex items-center gap-2"
+            vid="81"
+          >
+            Export
+            <svg
+              width="12"
+              height="12"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              vid="82"
+            >
+              <polyline points="6 9 12 15 18 9" vid="83"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div
+          class="w-full max-w-[800px] bg-white shadow-soft rounded-lg min-h-[1000px] p-16 relative group border border-stone-100 transition-transform duration-500"
+          vid="84"
+        >
+          <div
+            class="absolute left-6 top-0 bottom-0 w-px border-l border-dashed border-stone-200"
+            vid="85"
+          ></div>
+
+          <header class="mb-16 border-b border-stone-100 pb-8 pl-8" vid="86">
+            <h1
+              class="font-serif text-5xl text-stone-900 mb-8 tracking-tight leading-tight"
+              vid="87"
+            >
+              User Dashboard 2.0
+            </h1>
+            <div class="flex gap-12" vid="88">
+              <div class="space-y-1" vid="89">
+                <span
+                  class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                  vid="90"
+                  >Status</span
+                >
+                <span
+                  class="font-mono text-sm font-medium bg-stone-100 px-2 py-0.5 rounded text-stone-600"
+                  vid="91"
+                  >Draft</span
+                >
+              </div>
+              <div class="space-y-1" vid="92">
+                <span
+                  class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                  vid="93"
+                  >Version</span
+                >
+                <span class="font-mono text-sm font-medium text-stone-600" vid="94">1.2.0</span>
+              </div>
+              <div class="space-y-1" vid="95">
+                <span
+                  class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                  vid="96"
+                  >Owner</span
+                >
+                <div class="flex items-center gap-2" vid="97">
+                  <div
+                    class="w-5 h-5 rounded-full bg-teal-100 border border-teal-200"
+                    vid="98"
+                  ></div>
+                  <span class="text-sm font-medium text-stone-900" vid="99">Product Team</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="prose-content pl-8 text-stone-600" vid="100">
+            <section class="mb-12" vid="101">
+              <h2 class="font-serif text-2xl text-stone-900 flex items-center gap-3" vid="102">
+                <span class="text-stone-300 text-base font-sans font-bold" vid="103">01</span>
+                Overview
+              </h2>
+              <p vid="104">
+                The User Dashboard 2.0 aims to provide End Customers with a consolidated view of
+                their account health, usage metrics, and quick actions. The primary goal is to
+                reduce support ticket volume by 15% through better self-service data visibility.
+              </p>
+            </section>
+
+            <section class="mb-12" vid="105">
+              <h2 class="font-serif text-2xl text-stone-900 flex items-center gap-3" vid="106">
+                <span class="text-stone-300 text-base font-sans font-bold" vid="107">02</span>
+                Core Requirements
+              </h2>
+              <ul class="space-y-4" vid="108">
+                <li class="flex gap-3 items-start" vid="109">
+                  <div
+                    class="mt-2 w-1.5 h-1.5 rounded-full bg-peach-500 flex-shrink-0"
+                    vid="110"
+                  ></div>
+                  <span vid="111">
+                    <strong class="text-stone-900 font-medium" vid="112">Layout Strategy:</strong>
+                    A responsive grid layout optimized for desktop and tablet viewports.
+                  </span>
+                </li>
+                <li class="flex gap-3 items-start" vid="113">
+                  <div
+                    class="mt-2 w-1.5 h-1.5 rounded-full bg-peach-500 flex-shrink-0"
+                    vid="114"
+                  ></div>
+                  <span vid="115">
+                    <strong class="text-stone-900 font-medium" vid="116">Data Freshness:</strong>
+                    Analytics widgets will implement a daily caching strategy to ensure sub-200ms
+                    load times, with an option for manual refresh.
+                  </span>
+                </li>
+                <li class="flex gap-3 items-start" vid="117">
+                  <div
+                    class="mt-2 w-1.5 h-1.5 rounded-full bg-peach-500 flex-shrink-0"
+                    vid="118"
+                  ></div>
+                  <span vid="119">
+                    <strong class="text-stone-900 font-medium" vid="120">Navigation:</strong>
+                    Simplified sidebar navigation collapsing to a bottom sheet on mobile devices.
+                  </span>
+                </li>
+              </ul>
+            </section>
+
+            <section class="mb-12" vid="121">
+              <h2 class="font-serif text-2xl text-stone-900 flex items-center gap-3" vid="122">
+                <span class="text-stone-300 text-base font-sans font-bold" vid="123">03</span>
+                Success Metrics
+              </h2>
+              <div class="grid grid-cols-3 gap-4 mt-6" vid="124">
+                <div
+                  class="p-4 rounded-lg bg-stone-50 border border-stone-100 text-center"
+                  vid="125"
+                >
+                  <div class="text-2xl font-serif text-stone-900 mb-1" vid="126">&gt; 2m</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-stone-500 font-bold"
+                    vid="127"
+                  >
+                    Avg Time on Page
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-lg bg-stone-50 border border-stone-100 text-center"
+                  vid="128"
+                >
+                  <div class="text-2xl font-serif text-stone-900 mb-1" vid="129">-15%</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-stone-500 font-bold"
+                    vid="130"
+                  >
+                    Ticket Volume
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-lg bg-stone-50 border border-stone-100 text-center"
+                  vid="131"
+                >
+                  <div class="text-2xl font-serif text-stone-900 mb-1" vid="132">30%</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-stone-500 font-bold"
+                    vid="133"
+                  >
+                    Mobile Adoption
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+        <div class="h-16" vid="134"></div>
+      </section>
+    </main>
+
+    <div
+      id="settings-modal"
+      class="fixed inset-0 z-50 bg-stone-900/20 backdrop-blur-sm hidden flex items-center justify-center p-4"
+      vid="135"
+    >
+      <div
+        class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md border border-stone-100"
+        vid="136"
+      >
+        <h3 class="font-serif text-2xl mb-6" vid="137">Settings</h3>
+      </div>
+    </div>
+
+    <script vid="138">
+      const buttons = document.querySelectorAll('button')
+      buttons.forEach((btn) => {
+        btn.addEventListener('click', function () {
+          this.classList.add('scale-95')
+          setTimeout(() => {
+            this.classList.remove('scale-95')
+          }, 100)
+        })
+      })
+
+      const optionGroups = document.querySelectorAll('.flex.flex-col.gap-2, .flex.flex-wrap.gap-2')
+      optionGroups.forEach((group) => {
+        const btns = group.querySelectorAll('button')
+        btns.forEach((btn) => {
+          btn.addEventListener('click', () => {
+            btns.forEach((b) => {
+              b.classList.remove(
+                'bg-sage-100',
+                'text-sage-800',
+                'ring-1',
+                'ring-sage-200',
+                'shadow-sm'
+              )
+              b.classList.add('bg-stone-100', 'text-stone-600')
+
+              const svg = b.querySelector('svg')
+              if (svg && svg.classList.contains('text-sage-800')) {
+                b.classList.remove(
+                  'bg-gradient-to-r',
+                  'from-sage-100',
+                  'to-white',
+                  'border-sage-200'
+                )
+                b.classList.add('bg-white', 'border-stone-200')
+                const icon = b.querySelector('svg')
+                icon.style.opacity = '0'
+              }
+            })
+
+            if (btn.parentElement.classList.contains('flex-col')) {
+              btn.classList.remove('bg-white', 'border-stone-200', 'text-stone-500')
+              btn.classList.add(
+                'bg-gradient-to-r',
+                'from-sage-100',
+                'to-white',
+                'border-sage-200',
+                'text-sage-800'
+              )
+              const icon = btn.querySelector('svg')
+              icon.style.opacity = '1'
+              icon.classList.remove('text-stone-400')
+              icon.classList.add('text-sage-800')
+            } else {
+              btn.classList.remove('bg-stone-100', 'text-stone-600')
+              btn.classList.add(
+                'bg-sage-100',
+                'text-sage-800',
+                'ring-1',
+                'ring-sage-200',
+                'shadow-sm'
+              )
+            }
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

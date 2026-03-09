@@ -1,0 +1,476 @@
+<html lang="en" vid="0">
+  <head vid="1">
+    <meta charset="UTF-8" vid="2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" vid="3" />
+    <title vid="4">Version History - Variant</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17" vid="5"></script>
+    <script vid="6">
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'Georgia', 'serif'],
+              mono: ['JetBrains Mono', 'monospace']
+            },
+            colors: {
+              stone: {
+                50: '#FBFBF9',
+                100: '#F3F1ED',
+                200: '#E8E6E1',
+                800: '#2A2A2A',
+                900: '#1C1C1E'
+              },
+              peach: {
+                50: '#FFF5F0',
+                100: '#FFEADD',
+                200: '#FFD6C9',
+                500: '#E08D79'
+              },
+              sage: {
+                100: '#D4E8D4',
+                200: '#BFE0BF',
+                800: '#2F422F'
+              }
+            },
+            boxShadow: {
+              soft: '0 20px 40px -10px rgba(0,0,0,0.05)',
+              card: '0 2px 12px rgba(0,0,0,0.03)',
+              float: '0 12px 32px rgba(0,0,0,0.08)'
+            }
+          }
+        }
+      }
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;display=swap"
+      rel="stylesheet"
+      vid="7"
+    />
+    <style vid="8">
+      body {
+        background-color: #fbfbf9;
+      }
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .timeline-line {
+        background: linear-gradient(180deg, #e8e6e1 0%, #e8e6e1 100%);
+      }
+    </style>
+  </head>
+  <body
+    class="h-screen flex flex-col overflow-hidden text-stone-800 font-sans selection:bg-peach-200"
+    vid="9"
+  >
+    <header
+      class="h-20 px-8 flex items-center justify-between bg-stone-50 border-b border-stone-200/50 z-20"
+      vid="10"
+    >
+      <div class="flex items-center gap-12" vid="11">
+        <div class="flex items-center gap-3" vid="12">
+          <div
+            class="w-8 h-8 rounded-full bg-gradient-to-br from-stone-800 to-stone-600 flex items-center justify-center text-white font-serif italic font-bold"
+            vid="13"
+          >
+            V
+          </div>
+          <span class="font-semibold tracking-tight text-lg" vid="14"
+            >Variant<span class="text-stone-400 font-normal" vid="15">Editor</span></span
+          >
+        </div>
+        <nav class="hidden md:flex p-1 bg-stone-200/50 rounded-full" vid="16">
+          <button
+            class="px-6 py-1.5 text-sm font-medium text-stone-500 hover:text-stone-900 transition-all"
+            vid="17"
+          >
+            Editor
+          </button>
+          <button
+            class="px-6 py-1.5 bg-white shadow-sm rounded-full text-sm font-medium text-stone-900 transition-all flex items-center gap-1"
+            vid="18"
+          >
+            History
+            <span class="bg-stone-800 text-[10px] px-1.5 py-0.5 rounded-full text-white" vid="19"
+              >24</span
+            >
+          </button>
+          <button
+            class="px-6 py-1.5 text-sm font-medium text-stone-500 hover:text-stone-900 transition-all"
+            vid="20"
+          >
+            Settings
+          </button>
+        </nav>
+      </div>
+      <div class="flex items-center gap-4" vid="21">
+        <div
+          class="hidden lg:flex items-center gap-2 text-xs font-medium text-stone-400 px-3 py-1 bg-stone-100 rounded-lg border border-stone-200"
+          vid="22"
+        >
+          <span class="w-2 h-2 rounded-full bg-green-400" vid="23"></span>
+          System Operational
+        </div>
+        <button
+          class="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-100 transition-colors text-stone-600"
+          vid="24"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            vid="25"
+          >
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" vid="26"></path>
+          </svg>
+        </button>
+        <button
+          class="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center shadow-lg shadow-stone-900/10"
+          vid="27"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            vid="28"
+          >
+            <circle cx="12" cy="12" r="3" vid="29"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+              vid="30"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 flex overflow-hidden" vid="31">
+      <aside class="w-[480px] flex flex-col border-r border-stone-200 bg-white z-10" vid="32">
+        <div class="px-8 py-6 border-b border-stone-100 flex items-center justify-between" vid="33">
+          <div vid="34">
+            <h2 class="font-serif text-2xl text-stone-900" vid="35">Version History</h2>
+            <p class="text-xs text-stone-400 font-medium uppercase tracking-widest mt-1" vid="36">
+              24 Generations Total
+            </p>
+          </div>
+          <button
+            class="p-2 hover:bg-stone-50 rounded-lg text-stone-400 transition-colors"
+            vid="37"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              vid="38"
+            >
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" vid="39"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto scrollbar-hide px-8 py-4 relative" vid="40">
+          <div class="absolute left-[51px] top-0 bottom-0 w-px timeline-line" vid="41"></div>
+
+          <div class="space-y-10" vid="42">
+            <div class="relative pl-12 group cursor-pointer" vid="43">
+              <div
+                class="absolute left-[-4px] top-1.5 w-3 h-3 rounded-full bg-peach-500 ring-4 ring-peach-50 z-10"
+                vid="44"
+              ></div>
+              <div class="bg-peach-50/50 ring-1 ring-peach-100 p-4 rounded-xl" vid="45">
+                <div class="flex justify-between items-start mb-2" vid="46">
+                  <span
+                    class="text-[10px] font-bold text-peach-500 uppercase tracking-widest"
+                    vid="47"
+                    >Current Version</span
+                  >
+                  <span class="text-[10px] font-mono text-stone-400" vid="48">v1.2.0</span>
+                </div>
+                <h4 class="font-medium text-stone-900 mb-1" vid="49">
+                  Updated Success Metrics &amp; Overview
+                </h4>
+                <p class="text-sm text-stone-500 mb-3" vid="50">
+                  Added Ticket Volume reduction target and adoption KPIs.
+                </p>
+                <div
+                  class="flex items-center gap-4 text-[10px] text-stone-400 font-medium"
+                  vid="51"
+                >
+                  <span vid="52">Just now</span>
+                  <span class="w-1 h-1 rounded-full bg-stone-300" vid="53"></span>
+                  <span vid="54">Product Team</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative pl-12 group cursor-pointer hover:translate-x-1 transition-transform"
+              vid="55"
+            >
+              <div
+                class="absolute left-[-3px] top-1.5 w-2.5 h-2.5 rounded-full bg-stone-300 group-hover:bg-stone-400 transition-colors z-10"
+                vid="56"
+              ></div>
+              <div
+                class="p-4 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-100 transition-all"
+                vid="57"
+              >
+                <div class="flex justify-between items-start mb-2" vid="58">
+                  <span
+                    class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                    vid="59"
+                    >Yesterday, 4:20 PM</span
+                  >
+                  <span class="text-[10px] font-mono text-stone-400" vid="60">v1.1.8</span>
+                </div>
+                <h4 class="font-medium text-stone-900 mb-1" vid="61">Refined Core Requirements</h4>
+                <div class="flex gap-1.5 mb-3" vid="62">
+                  <span
+                    class="text-[10px] px-1.5 py-0.5 bg-green-50 text-green-700 rounded"
+                    vid="63"
+                    >+3 additions</span
+                  >
+                  <span class="text-[10px] px-1.5 py-0.5 bg-red-50 text-red-700 rounded" vid="64"
+                    >-1 removal</span
+                  >
+                </div>
+                <div class="flex gap-2" vid="65">
+                  <button
+                    class="px-3 py-1 bg-white border border-stone-200 rounded-md text-[10px] font-semibold text-stone-600 hover:bg-stone-50 transition-colors"
+                    vid="66"
+                  >
+                    Compare
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-stone-200 rounded-md text-[10px] font-semibold text-stone-600 hover:bg-stone-50 transition-colors"
+                    vid="67"
+                  >
+                    Restore
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative pl-12 group cursor-pointer hover:translate-x-1 transition-transform"
+              vid="68"
+            >
+              <div
+                class="absolute left-[-3px] top-1.5 w-2.5 h-2.5 rounded-full bg-stone-300 group-hover:bg-stone-400 transition-colors z-10"
+                vid="69"
+              ></div>
+              <div
+                class="p-4 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-100 transition-all"
+                vid="70"
+              >
+                <div class="flex justify-between items-start mb-2" vid="71">
+                  <span
+                    class="text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                    vid="72"
+                    >Yesterday, 11:15 AM</span
+                  >
+                  <span class="text-[10px] font-mono text-stone-400" vid="73">v1.1.2</span>
+                </div>
+                <h4 class="font-medium text-stone-900 mb-1" vid="74">Persona Mapping Update</h4>
+                <p class="text-sm text-stone-500 mb-3 truncate" vid="75">
+                  Integrated 'End Customer' workflow feedback...
+                </p>
+                <div class="flex gap-2" vid="76">
+                  <button
+                    class="px-3 py-1 bg-white border border-stone-200 rounded-md text-[10px] font-semibold text-stone-600 hover:bg-stone-50 transition-colors"
+                    vid="77"
+                  >
+                    Compare
+                  </button>
+                  <button
+                    class="px-3 py-1 bg-white border border-stone-200 rounded-md text-[10px] font-semibold text-stone-600 hover:bg-stone-50 transition-colors"
+                    vid="78"
+                  >
+                    Restore
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative pl-12 group cursor-pointer hover:translate-x-1 transition-transform"
+              vid="79"
+            >
+              <div
+                class="absolute left-[-3px] top-1.5 w-2.5 h-2.5 rounded-full bg-stone-200 transition-colors z-10"
+                vid="80"
+              ></div>
+              <div
+                class="p-4 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-100 transition-all"
+                vid="81"
+              >
+                <div class="flex justify-between items-start mb-2" vid="82">
+                  <span
+                    class="text-[10px] font-bold text-stone-300 uppercase tracking-widest"
+                    vid="83"
+                    >Oct 24, 9:00 AM</span
+                  >
+                  <span class="text-[10px] font-mono text-stone-300" vid="84">v1.0.0</span>
+                </div>
+                <h4 class="font-medium text-stone-400 mb-1" vid="85">Initial PRD Draft</h4>
+                <p class="text-sm text-stone-300 italic" vid="86">Skeleton structure created.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section
+        class="flex-1 bg-stone-100/50 flex flex-col items-center overflow-y-auto p-12 relative"
+        vid="87"
+      >
+        <div
+          class="absolute top-8 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] shadow-xl z-20"
+          vid="88"
+        >
+          Comparing v1.2.0 vs v1.1.8
+        </div>
+
+        <div
+          class="w-full max-w-[800px] bg-white shadow-soft rounded-lg p-16 relative border border-stone-100"
+          vid="89"
+        >
+          <div
+            class="absolute left-6 top-0 bottom-0 w-px border-l border-dashed border-stone-200"
+            vid="90"
+          ></div>
+
+          <header class="mb-12 border-b border-stone-100 pb-8 pl-8" vid="91">
+            <h1 class="font-serif text-5xl text-stone-900 mb-8 tracking-tight" vid="92">
+              User Dashboard 2.0
+            </h1>
+            <div class="flex gap-8" vid="93">
+              <div class="space-y-1" vid="94">
+                <span
+                  class="block text-[10px] font-bold text-stone-400 uppercase tracking-widest"
+                  vid="95"
+                  >Version</span
+                >
+                <div class="flex items-center gap-2" vid="96">
+                  <span class="font-mono text-sm text-stone-400 line-through" vid="97">1.1.8</span>
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="text-peach-500"
+                    vid="98"
+                  >
+                    <path d="M5 12h14m-7-7 7 7-7 7" vid="99"></path>
+                  </svg>
+                  <span class="font-mono text-sm font-bold text-peach-500" vid="100">1.2.0</span>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="pl-8 space-y-12" vid="101">
+            <div vid="102">
+              <h2 class="font-serif text-2xl text-stone-900 mb-4 flex items-center gap-3" vid="103">
+                <span class="text-stone-300 text-base font-sans font-bold" vid="104">01</span>
+                Overview
+              </h2>
+              <div
+                class="p-4 bg-red-50/30 border-l-2 border-red-200 text-stone-400 line-through mb-2 rounded-r"
+                vid="105"
+              >
+                The User Dashboard aims to provide customers with account views.
+              </div>
+              <div
+                class="p-4 bg-green-50/50 border-l-2 border-green-300 text-stone-800 rounded-r"
+                vid="106"
+              >
+                The User Dashboard 2.0 aims to provide End Customers with a consolidated view of
+                their account health, usage metrics, and quick actions.
+              </div>
+            </div>
+
+            <div vid="107">
+              <h2 class="font-serif text-2xl text-stone-900 mb-4 flex items-center gap-3" vid="108">
+                <span class="text-stone-300 text-base font-sans font-bold" vid="109">03</span>
+                Success Metrics
+              </h2>
+              <div class="grid grid-cols-3 gap-4" vid="110">
+                <div
+                  class="p-4 rounded-lg bg-stone-50 border border-stone-100 text-center opacity-50"
+                  vid="111"
+                >
+                  <div class="text-2xl font-serif text-stone-400 mb-1" vid="112">&gt; 5m</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-stone-400 font-bold"
+                    vid="113"
+                  >
+                    Old Target
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-lg bg-green-50 border border-green-100 text-center ring-2 ring-green-200 shadow-sm"
+                  vid="114"
+                >
+                  <div class="text-2xl font-serif text-green-900 mb-1" vid="115">-15%</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-green-600 font-bold"
+                    vid="116"
+                  >
+                    New Ticket KPI
+                  </div>
+                </div>
+                <div
+                  class="p-4 rounded-lg bg-green-50 border border-green-100 text-center ring-2 ring-green-200 shadow-sm"
+                  vid="117"
+                >
+                  <div class="text-2xl font-serif text-green-900 mb-1" vid="118">30%</div>
+                  <div
+                    class="text-[10px] uppercase tracking-wide text-green-600 font-bold"
+                    vid="119"
+                  >
+                    Mobile Target
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fixed bottom-12 right-12 flex gap-3" vid="120">
+          <button
+            class="px-6 py-3 bg-white border border-stone-200 rounded-full shadow-float text-sm font-semibold text-stone-600 hover:bg-stone-50 transition-all"
+            vid="121"
+          >
+            Cancel Comparison
+          </button>
+          <button
+            class="px-8 py-3 bg-stone-900 text-white rounded-full shadow-float text-sm font-semibold hover:bg-stone-800 transition-all"
+            vid="122"
+          >
+            Apply Changes
+          </button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

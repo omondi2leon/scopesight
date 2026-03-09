@@ -1,0 +1,50 @@
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'Inter', 'sans-serif';
+  --font-serif: 'Playfair Display', 'Georgia', 'serif';
+  --font-mono: 'JetBrains Mono', 'monospace';
+
+  --color-stone-50: #fbfbf9;
+  --color-stone-100: #f3f1ed;
+  --color-stone-200: #e8e6e1;
+  --color-stone-300: #d6d3d1;
+  --color-stone-400: #a8a29e;
+  --color-stone-500: #78716c;
+  --color-stone-800: #2a2a2a;
+  --color-stone-900: #1c1c1e;
+
+  --color-peach-50: #fff5f0;
+  --color-peach-100: #ffeadd;
+  --color-peach-200: #ffd6c9;
+  --color-peach-500: #e08d79;
+
+  --color-sage-100: #d4e8d4;
+  --color-sage-200: #bfe0bf;
+  --color-sage-500: #71a171;
+  --color-sage-800: #2f422f;
+
+  --shadow-soft: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.03);
+  --shadow-float: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+@media print {
+  html,
+  body,
+  #root {
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
