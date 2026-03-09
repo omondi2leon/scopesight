@@ -3,7 +3,7 @@ name: Build and Release App
 on:
   push:
     tags:
-      - 'v*' # Trigger build on any tag starting with "v", e.g. v1.0.0
+      - 'v*'
 
 jobs:
   release:
@@ -27,29 +27,31 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Build Mac App
+      - name: Build Electron App (Mac)
         if: matrix.os == 'macos-latest'
         run: |
-          npm run build:mac
+          npx electron-vite build
+          npx electron-builder --mac --publish never
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
-          
-      - name: Build Windows App
-        if: matrix.os == 'windows-latest'
-        run: npm run build:win
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload Mac Release Asset
+      - name: Build Electron App (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          npx electron-vite build
+          npx electron-builder --win --publish never
+
+      - name: Upload Mac Release Assets
         if: matrix.os == 'macos-latest'
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.dmg
+          files: |
+            dist/*.dmg
+            dist/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: Upload Windows Release Asset
+
+      - name: Upload Windows Release Assets
         if: matrix.os == 'windows-latest'
         uses: softprops/action-gh-release@v2
         with:
