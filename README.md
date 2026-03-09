@@ -1,49 +1,98 @@
-# PRD Creator
+# ScopeSight
 
-A local-first, AI-powered Product Requirements Document creator.
+**A beautiful, local-first, AI-powered Product Requirements Document generator.**
 
-## Features
+ScopeSight is a desktop application that helps product managers and teams create professional PRDs through conversational AI. Your data stays entirely on your machine — no cloud accounts, no subscriptions, no data collection.
 
-- **Split-pane UI**: Chat with AI on the left, edit PRD on the right.
-- **Deepseek Integration**: Secure API key storage, smart prompt engine.
-- **Real-time Editor**: Monaco-based Markdown editor.
-- **Export**: PDF (via Print), Markdown.
-- **Persistence**: Auto-saves your work locally.
+## ✨ Features
 
-## Installation
+- **Multi-Provider AI** — Supports **DeepSeek**, **OpenAI (GPT-4o)**, **Anthropic (Claude)**, and **Google Gemini**. Switch between models on the fly.
+- **Split-Pane Editor** — Chat with AI on the left, see your PRD rendered in real-time on the right.
+- **Monaco Code Editor** — Full Markdown editing with syntax highlighting, powered by the same editor as VS Code.
+- **PDF & Markdown Export** — Export your documents as clean, multi-page PDFs or raw Markdown files.
+- **DOCX Export** — Generate Word documents for stakeholders who prefer `.docx`.
+- **Document History** — All your PRDs are automatically saved and browseable from the History page.
+- **Encrypted API Keys** — Your provider API keys are encrypted using your OS's native secure storage (macOS Keychain / Windows Credential Manager).
+- **100% Local & Private** — No sign-up, no cloud sync. Everything runs and saves on your computer.
 
-1. Clone the repository.
-2. Install dependencies:
-   ```bash
-   cd prd-app
-   npm install
-   ```
-3. Run in development mode:
-   ```bash
-   npm run dev
-   ```
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+## 📦 Download
 
-## API Key Setup
+Head to the [**Releases**](https://github.com/omondi2leon/scopesight/releases) page and download the latest installer:
 
-1. Open the application.
-2. Click on "Settings" in the top right corner.
-3. Enter your Deepseek API Key (starts with `sk-...`).
-4. Click "Save Configuration".
+| Platform | File |
+|----------|------|
+| macOS    | `ScopeSight-x.x.x.dmg` |
+| Windows  | `ScopeSight-x.x.x-setup.exe` |
 
-## Troubleshooting
+## 🛠 Development
 
-- **API Key not saving**: Ensure you are running on a supported OS (Windows/Mac/Linux) where `safeStorage` is available.
-- **Network Errors**: Check your internet connection and verify Deepseek API status.
-- **CSP Errors**: If you see Content Security Policy errors in console, check `index.html`.
+### Prerequisites
 
-## Tech Stack
+- [Node.js](https://nodejs.org/) v18+
+- npm
 
-- Electron
-- React + Vite
-- Tailwind CSS
-- Monaco Editor
-- Zustand (State Management)
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/omondi2leon/scopesight.git
+cd scopesight
+
+# Install dependencies
+npm install
+
+# Run in development mode
+npm run dev
+```
+
+### Build
+
+```bash
+# macOS
+npm run build:mac
+
+# Windows
+npm run build:win
+
+# Linux
+npm run build:linux
+```
+
+Build output will be in the `dist/` directory.
+
+## ⚙️ Configuration
+
+1. Launch ScopeSight.
+2. Navigate to **Settings** (top-right corner).
+3. Go to the **Security & APIs** tab.
+4. Enter your API key for any supported provider:
+   - **DeepSeek** — `sk-...`
+   - **OpenAI** — `sk-...`
+   - **Anthropic** — `sk-ant-...`
+   - **Google Gemini** — `AI...`
+5. Select your preferred model in the **General** tab, or use the inline model switcher in the chat panel.
+
+## 🏗 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | Electron + electron-vite |
+| Frontend | React 19 + TypeScript |
+| Styling | Tailwind CSS v4 |
+| Editor | Monaco Editor |
+| State | Zustand |
+| Database | Dexie (IndexedDB) |
+| AI SDKs | OpenAI, Anthropic, Google Generative AI |
+| Build | electron-builder |
+| CI/CD | GitHub Actions |
+
+## 🔒 Privacy & Security
+
+- **No telemetry.** ScopeSight does not phone home or collect any analytics.
+- **No cloud storage.** All documents are saved to your local machine's IndexedDB.
+- **Encrypted secrets.** API keys are encrypted via Electron's `safeStorage`, backed by your operating system's native credential manager.
+- **Open source.** You can audit every line of code.
+
+## 📄 License
+
+MIT
