@@ -37,7 +37,7 @@ interface AppState {
   createNewDraft: () => void
   loadDraft: (id: string) => void
   deleteDraft: (id: string) => void
-  _syncDraft: () => void
+  _syncDraft: (state: AppState, updates: Partial<AppState>) => Partial<AppState>
 
   apiKey: string | null // Keep for backward compatibility/legacy code if any
   apiKeys: Record<string, string | null>
@@ -132,22 +132,25 @@ export const useStore = create<AppState>()(
           return nextState
         })
       },
-      _syncDraft: () => {
-        const { currentDraftId, prdContent, chatHistory, prdHistory, drafts } = get()
-        if (!currentDraftId) return
+      _syncDraft: (state, updates) => {
+        const currentDraftId = state.currentDraftId
+        if (!currentDraftId) return updates
+
+        const prdContent = updates.prdContent !== undefined ? updates.prdContent : state.prdContent
+        const chatHistory = updates.chatHistory !== undefined ? updates.chatHistory : state.chatHistory
+        const prdHistory = updates.prdHistory !== undefined ? updates.prdHistory : state.prdHistory
 
         let title = 'Untitled PRD'
         if (prdHistory.length > 0) {
           title = prdHistory[0].title
         } else {
-          // Attempt to extract title from content
           const match = prdContent.match(/^#\s+(.+)$/m)
           if (match && match[1].trim() !== 'Product Requirements Document') {
             title = match[1].trim()
           }
         }
 
-        const newDrafts = drafts.map((d) =>
+        const newDrafts = state.drafts.map((d) =>
           d.id === currentDraftId
             ? {
                 ...d,
@@ -159,7 +162,7 @@ export const useStore = create<AppState>()(
               }
             : d
         )
-        set({ drafts: newDrafts })
+        return { ...updates, drafts: newDrafts }
       },
 
       apiKey: null,
@@ -224,23 +227,20 @@ export const useStore = create<AppState>()(
       },
       prdContent: DEFAULT_PRD_CONTENT,
       setPrdContent: (content) => {
-        set({ prdContent: content })
-        get()._syncDraft()
+        set((state) => get()._syncDraft(state, { prdContent: content }))
       },
       selectedModel: 'deepseek-chat',
       setSelectedModel: (model) => set({ selectedModel: model }),
       chatHistory: [],
       addChatMessage: (role, content, options) => {
-        set((state) => ({ chatHistory: [...state.chatHistory, { role, content, options }] }))
-        get()._syncDraft()
+        set((state) => get()._syncDraft(state, { chatHistory: [...state.chatHistory, { role, content, options }] }))
       },
       clearChat: () => {
-        set({ chatHistory: [] })
-        get()._syncDraft()
+        set((state) => get()._syncDraft(state, { chatHistory: [] }))
       },
       prdHistory: [],
       addPrdVersion: (version) => {
-        set((state) => ({
+        set((state) => get()._syncDraft(state, {
           prdHistory: [
             {
               ...version,
@@ -250,7 +250,6 @@ export const useStore = create<AppState>()(
             ...state.prdHistory
           ]
         }))
-        get()._syncDraft()
       }
     }),
     {
@@ -289,15 +288,14 @@ export const useStore = create<AppState>()(
               // Create a blank draft
               state.createNewDraft()
             }
+          } else if (state.currentDraftId) {
+            state.loadDraft(state.currentDraftId)
           }
         }
       },
       partialize: (state) => ({
         drafts: state.drafts,
         currentDraftId: state.currentDraftId,
-        prdContent: state.prdContent,
-        chatHistory: state.chatHistory,
-        prdHistory: state.prdHistory,
         selectedModel: state.selectedModel
       })
     }
