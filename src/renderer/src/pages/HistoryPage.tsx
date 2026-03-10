@@ -213,86 +213,86 @@ const HistoryPage = () => {
                 })
               )
             ) : // DRAFTS TAB
-              drafts.length === 0 ? (
-                <div className="py-20 text-center">
-                  <h3 className="text-sm font-semibold text-stone-900 mb-1">No Drafts Found</h3>
-                </div>
-              ) : (
-                drafts.map((draft) => {
-                  const isCurrent = draft.id === currentDraftId
-                  return (
+            drafts.length === 0 ? (
+              <div className="py-20 text-center">
+                <h3 className="text-sm font-semibold text-stone-900 mb-1">No Drafts Found</h3>
+              </div>
+            ) : (
+              drafts.map((draft) => {
+                const isCurrent = draft.id === currentDraftId
+                return (
+                  <div
+                    key={draft.id}
+                    onClick={() => {
+                      loadDraft(draft.id)
+                      navigate('/editor')
+                    }}
+                    className={clsx(
+                      'relative pl-12 group cursor-pointer transition-all',
+                      !isCurrent && 'hover:translate-x-1'
+                    )}
+                  >
                     <div
-                      key={draft.id}
-                      onClick={() => {
-                        loadDraft(draft.id)
-                        navigate('/editor')
-                      }}
                       className={clsx(
-                        'relative pl-12 group cursor-pointer transition-all',
-                        !isCurrent && 'hover:translate-x-1'
+                        'absolute w-2.5 h-2.5 rounded-full z-10 transition-colors',
+                        isCurrent
+                          ? 'left-[-4px] top-1.5 w-3 h-3 bg-sage-500 ring-4 ring-sage-50'
+                          : 'left-[-3px] top-1.5 bg-stone-300 group-hover:bg-stone-400'
+                      )}
+                    ></div>
+
+                    <div
+                      className={clsx(
+                        'p-4 rounded-xl transition-all border',
+                        isCurrent
+                          ? 'bg-sage-50 ring-1 ring-sage-200 border-transparent'
+                          : 'hover:bg-stone-50 border-transparent hover:border-stone-100'
                       )}
                     >
-                      <div
-                        className={clsx(
-                          'absolute w-2.5 h-2.5 rounded-full z-10 transition-colors',
-                          isCurrent
-                            ? 'left-[-4px] top-1.5 w-3 h-3 bg-sage-500 ring-4 ring-sage-50'
-                            : 'left-[-3px] top-1.5 bg-stone-300 group-hover:bg-stone-400'
-                        )}
-                      ></div>
-
-                      <div
-                        className={clsx(
-                          'p-4 rounded-xl transition-all border',
-                          isCurrent
-                            ? 'bg-sage-50 ring-1 ring-sage-200 border-transparent'
-                            : 'hover:bg-stone-50 border-transparent hover:border-stone-100'
-                        )}
-                      >
-                        <div className="flex justify-between items-start mb-2">
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">
-                            {formatDate(draft.updatedAt)}
-                          </span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              deleteDraft(draft.id)
-                            }}
-                            className="opacity-0 group-hover:opacity-100 text-stone-400 hover:text-red-500 transition-colors p-1 rounded-md hover:bg-red-50"
-                            title="Delete Draft"
-                            aria-label="Delete draft"
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">
+                          {formatDate(draft.updatedAt)}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            deleteDraft(draft.id)
+                          }}
+                          className="opacity-0 group-hover:opacity-100 text-stone-400 hover:text-red-500 transition-colors p-1 rounded-md hover:bg-red-50"
+                          title="Delete Draft"
+                          aria-label="Delete draft"
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                           >
-                            <svg
-                              width="14"
-                              height="14"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <polyline points="3 6 5 6 21 6"></polyline>
-                              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                            </svg>
-                          </button>
-                        </div>
-                        <h4 className={clsx('font-medium mb-1 text-stone-900')}>
-                          {draft.title || 'Untitled PRD'}
-                        </h4>
-                        <div className="flex gap-3 text-[10px] text-stone-500 mt-3 font-medium">
-                          <span className="bg-white px-2 py-1 rounded-md border border-stone-200 shadow-sm">
-                            {draft.prdHistory.length} Versions
-                          </span>
-                          <span className="bg-white px-2 py-1 rounded-md border border-stone-200 shadow-sm">
-                            {draft.chatHistory.length} Messages
-                          </span>
-                        </div>
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <h4 className={clsx('font-medium mb-1 text-stone-900')}>
+                        {draft.title || 'Untitled PRD'}
+                      </h4>
+                      <div className="flex gap-3 text-[10px] text-stone-500 mt-3 font-medium">
+                        <span className="bg-white px-2 py-1 rounded-md border border-stone-200 shadow-sm">
+                          {draft.prdHistory.length} Versions
+                        </span>
+                        <span className="bg-white px-2 py-1 rounded-md border border-stone-200 shadow-sm">
+                          {draft.chatHistory.length} Messages
+                        </span>
                       </div>
                     </div>
-                  )
-                })
-              )}
+                  </div>
+                )
+              })
+            )}
           </div>
         </div>
       </aside>
