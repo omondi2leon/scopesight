@@ -142,13 +142,14 @@ export const useStore = create<AppState>()(
         const prdHistory = updates.prdHistory !== undefined ? updates.prdHistory : state.prdHistory
 
         let title = 'Untitled PRD'
-        if (prdHistory.length > 0) {
+        // Always try to parse title from the current PRD content first.
+        // It provides the most up-to-date and accurate reflection of the document.
+        const match = prdContent.match(/^#\s+(.+)$/m)
+        if (match && match[1].trim() !== 'Product Requirements Document') {
+          title = match[1].trim()
+        } else if (prdHistory.length > 0) {
+          // Fallback to the last known title if no H1 exists in the current draft
           title = prdHistory[0].title
-        } else {
-          const match = prdContent.match(/^#\s+(.+)$/m)
-          if (match && match[1].trim() !== 'Product Requirements Document') {
-            title = match[1].trim()
-          }
         }
 
         const newDrafts = state.drafts.map((d) =>
