@@ -137,7 +137,8 @@ export const useStore = create<AppState>()(
         if (!currentDraftId) return updates
 
         const prdContent = updates.prdContent !== undefined ? updates.prdContent : state.prdContent
-        const chatHistory = updates.chatHistory !== undefined ? updates.chatHistory : state.chatHistory
+        const chatHistory =
+          updates.chatHistory !== undefined ? updates.chatHistory : state.chatHistory
         const prdHistory = updates.prdHistory !== undefined ? updates.prdHistory : state.prdHistory
 
         let title = 'Untitled PRD'
@@ -233,23 +234,29 @@ export const useStore = create<AppState>()(
       setSelectedModel: (model) => set({ selectedModel: model }),
       chatHistory: [],
       addChatMessage: (role, content, options) => {
-        set((state) => get()._syncDraft(state, { chatHistory: [...state.chatHistory, { role, content, options }] }))
+        set((state) =>
+          get()._syncDraft(state, {
+            chatHistory: [...state.chatHistory, { role, content, options }]
+          })
+        )
       },
       clearChat: () => {
         set((state) => get()._syncDraft(state, { chatHistory: [] }))
       },
       prdHistory: [],
       addPrdVersion: (version) => {
-        set((state) => get()._syncDraft(state, {
-          prdHistory: [
-            {
-              ...version,
-              id: crypto.randomUUID(),
-              timestamp: new Date().toISOString()
-            },
-            ...state.prdHistory
-          ]
-        }))
+        set((state) =>
+          get()._syncDraft(state, {
+            prdHistory: [
+              {
+                ...version,
+                id: crypto.randomUUID(),
+                timestamp: new Date().toISOString()
+              },
+              ...state.prdHistory
+            ]
+          })
+        )
       }
     }),
     {
