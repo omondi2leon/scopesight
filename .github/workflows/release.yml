@@ -39,7 +39,7 @@ jobs:
       - name: Get version from package.json
         id: get_version
         shell: bash
-        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+        run: echo "VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Build Electron App (Mac)
         if: matrix.os == 'macos-latest'
@@ -59,7 +59,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}
+          tag_name: v${{ steps.get_version.outputs.VERSION }}
           files: |
             dist/*.dmg
             dist/*.zip
@@ -70,7 +70,7 @@ jobs:
         if: matrix.os == 'windows-latest'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ env.VERSION }}
+          tag_name: v${{ steps.get_version.outputs.VERSION }}
           files: dist/*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
