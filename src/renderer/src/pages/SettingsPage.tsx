@@ -5,9 +5,7 @@ import { MODEL_GROUPS } from '../lib/models'
 
 const SettingsPage = () => {
   const { apiKeys, saveApiKey, selectedModel, setSelectedModel } = useStore()
-  const [activeTab, setActiveTab] = useState<
-    'general' | 'members' | 'security' | 'notifications' | 'resources'
-  >('general')
+  const [activeTab, setActiveTab] = useState<'general' | 'security' | 'resources'>('general')
   const [keyInputs, setKeyInputs] = useState<Record<string, string>>({})
   const [editingProvider, setEditingProvider] = useState<string | null>(null)
   const [isSaving, setIsSaving] = useState(false)
@@ -61,28 +59,6 @@ const SettingsPage = () => {
           General Settings
         </button>
         <button
-          onClick={() => setActiveTab('members')}
-          className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all',
-            activeTab === 'members'
-              ? 'bg-stone-100 text-stone-900'
-              : 'text-stone-500 hover:text-stone-900 hover:bg-stone-50'
-          )}
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"></path>
-            <circle cx="9" cy="7" r="4"></circle>
-            <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
-          </svg>
-          Workspace Members
-        </button>
-        <button
           onClick={() => setActiveTab('security')}
           className={clsx(
             'w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all',
@@ -101,27 +77,6 @@ const SettingsPage = () => {
             <path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
           </svg>
           API Keys & Security
-        </button>
-        <button
-          onClick={() => setActiveTab('notifications')}
-          className={clsx(
-            'w-full flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg transition-all',
-            activeTab === 'notifications'
-              ? 'bg-stone-100 text-stone-900'
-              : 'text-stone-500 hover:text-stone-900 hover:bg-stone-50'
-          )}
-        >
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-          >
-            <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 01-3.46 0"></path>
-          </svg>
-          Notifications
         </button>
         <div className="h-8"></div>
         <div className="text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4 px-3">
@@ -180,99 +135,9 @@ const SettingsPage = () => {
                     ))}
                   </select>
                 </div>
-                <div className="p-6 bg-white border border-stone-200 rounded-2xl shadow-card">
-                  <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">
-                    Default Export Format
-                  </label>
-                  <div className="flex gap-2">
-                    <button className="flex-1 py-2 px-3 bg-sage-50 text-sage-800 border border-sage-200 rounded-lg text-xs font-semibold">
-                      Markdown
-                    </button>
-                    <button className="flex-1 py-2 px-3 bg-stone-50 text-stone-500 border border-stone-100 rounded-lg text-xs font-semibold hover:bg-stone-100">
-                      Notion
-                    </button>
-                    <button className="flex-1 py-2 px-3 bg-stone-50 text-stone-500 border border-stone-100 rounded-lg text-xs font-semibold hover:bg-stone-100">
-                      PDF
-                    </button>
-                  </div>
-                </div>
               </div>
             </section>
           )}
-
-          {activeTab === 'members' && (
-            <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-              <header className="flex justify-between items-end mb-8">
-                <div>
-                  <h2 className="font-serif text-3xl text-stone-900 mb-2">Workspace Members</h2>
-                  <p className="text-stone-500 text-sm">
-                    Manage who has access to your PRD drafts and components.
-                  </p>
-                </div>
-                <button className="px-4 py-2 bg-stone-900 text-white rounded-full text-xs font-semibold shadow-lg shadow-stone-900/10 hover:bg-stone-800 transition-colors">
-                  Invite Member
-                </button>
-              </header>
-              <div className="bg-white border border-stone-200 rounded-2xl shadow-card overflow-hidden">
-                <table className="w-full text-left border-collapse">
-                  <thead className="bg-stone-50 border-b border-stone-100">
-                    <tr>
-                      <th className="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                        Member
-                      </th>
-                      <th className="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest">
-                        Role
-                      </th>
-                      <th className="px-6 py-4 text-[10px] font-bold text-stone-400 uppercase tracking-widest text-right">
-                        Action
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-stone-100">
-                    <tr className="hover:bg-stone-50/50">
-                      <td className="px-6 py-4 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-peach-100 border border-peach-200 flex items-center justify-center text-peach-500 font-bold text-xs">
-                          PT
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-stone-900">Product Team</div>
-                          <p className="text-xs text-stone-500">michael@scopesight.app</p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 bg-stone-100 rounded text-xs text-stone-600">
-                          Admin
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right text-stone-300">—</td>
-                    </tr>
-                    <tr className="hover:bg-stone-50/50">
-                      <td className="px-6 py-4 flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center text-blue-500 font-bold text-xs">
-                          SA
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-stone-900">Sarah Chen</div>
-                          <p className="text-xs text-stone-500">sarah@scopesight.app</p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className="px-2 py-0.5 bg-stone-100 rounded text-xs text-stone-600">
-                          Editor
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right">
-                        <button className="text-xs font-semibold text-rose-400 hover:text-rose-600 transition-colors">
-                          Remove
-                        </button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </section>
-          )}
-
           {activeTab === 'security' && (
             <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
               <header className="mb-8">
@@ -384,46 +249,85 @@ const SettingsPage = () => {
             </section>
           )}
 
-          {(activeTab === 'notifications' || activeTab === 'resources') && (
-            <section className="animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col items-center justify-center h-full min-h-[400px]">
-              <div className="w-20 h-20 rounded-3xl bg-stone-100 border border-stone-200 flex items-center justify-center mb-6 text-stone-300">
-                {activeTab === 'notifications' ? (
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  >
-                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                    <path d="M13.73 21a2 2 0 01-3.46 0"></path>
-                  </svg>
-                ) : (
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  >
-                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-                  </svg>
-                )}
+          {activeTab === 'resources' && (
+            <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+              <header className="mb-12">
+                <h2 className="font-serif text-3xl text-stone-900 mb-3">User Manual</h2>
+                <p className="text-stone-500 text-sm">
+                  Welcome to Scopesight. This guide will help you master the art of AI-assisted PRD drafting.
+                </p>
+              </header>
+
+              <div className="space-y-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-4">
+                    <div className="w-10 h-10 rounded-xl bg-peach-50 border border-peach-100 flex items-center justify-center text-peach-500">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-stone-900">1. Setup API Keys</h3>
+                    <p className="text-sm text-stone-500 leading-relaxed">
+                      Before you can use the AI features, you must configure at least one API key. Head to the
+                      <span className="font-semibold text-stone-800"> API Keys & Security</span> tab to add keys
+                      for DeepSeek, OpenAI, Anthropic, or Gemini.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="w-10 h-10 rounded-xl bg-sage-50 border border-sage-100 flex items-center justify-center text-sage-600">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"></path>
+                        <path d="M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-stone-900">2. Drafting & AI Chat</h3>
+                    <p className="text-sm text-stone-500 leading-relaxed">
+                      Use the <span className="font-semibold text-stone-800">Editor</span> to write your PRD.
+                      If you need help, open the Chat panel on the left. The AI can analyze your current document
+                      and help you brainstorm, refine requirements, or generate content.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-500">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-stone-900">3. Version Control</h3>
+                    <p className="text-sm text-stone-500 leading-relaxed">
+                      Every time you significantly update your PRD, Scopesight tracks it in the <span className="font-semibold text-stone-800">History</span> view.
+                      You can create multiple independent PRD Drafts and switch between them at any time.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="w-10 h-10 rounded-xl bg-stone-100 border border-stone-200 flex items-center justify-center text-stone-600">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"></path>
+                        <polyline points="16 6 12 2 8 6"></polyline>
+                        <line x1="12" y1="2" x2="12" y2="15"></line>
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-stone-900">4. Exporting Work</h3>
+                    <p className="text-sm text-stone-500 leading-relaxed">
+                      When you are ready, click the <span className="font-semibold text-stone-800">Export</span> icon
+                      to save your document as a Markdown file or a PDF. These files are saved locally to your device.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-8 bg-stone-100/50 border border-stone-200 rounded-3xl">
+                  <h4 className="font-bold text-xs uppercase tracking-widest text-stone-400 mb-4">Pro Tip: Smart Titles</h4>
+                  <p className="text-sm text-stone-600 italic">
+                    "Scopesight automatically generates the title of your draft based on the first H1 heading (e.g., # My Project)
+                    found in your document. Keep your headings updated to keep your history organized!"
+                  </p>
+                </div>
               </div>
-              <h2 className="font-serif text-3xl text-stone-900 mb-2">Coming Soon</h2>
-              <p className="text-stone-500 max-w-sm text-center">
-                {activeTab === 'notifications'
-                  ? 'Notification preferences are currently being integrated. Check back soon!'
-                  : 'Our community forum and help resources are currently under construction.'}
-              </p>
-              <button
-                onClick={() => setActiveTab('general')}
-                className="mt-8 px-6 py-2 bg-stone-900 hover:bg-stone-800 text-white rounded-full text-sm font-semibold transition-colors"
-              >
-                Go to General Settings
-              </button>
             </section>
           )}
         </div>

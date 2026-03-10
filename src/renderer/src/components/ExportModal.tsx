@@ -45,11 +45,6 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
       window.print()
       document.title = originalTitle
       onClose()
-    } else if (type === 'notion') {
-      // Notion export = copy markdown (Notion supports pasting markdown)
-      await navigator.clipboard.writeText(prdContent)
-      setExportedAs('clipboard (paste into Notion)')
-      setStep('success')
     }
   }
 
@@ -95,7 +90,7 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                 <label className="block text-[10px] font-bold text-stone-400 uppercase tracking-widest mb-4">
                   Select Format
                 </label>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 gap-3">
                   <button
                     onClick={() => handleExport('markdown')}
                     className="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-stone-900 bg-stone-50 text-stone-900 transition-all group active:scale-95"
@@ -117,26 +112,6 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
                       </svg>
                     </div>
                     <span className="text-sm font-semibold">Markdown</span>
-                  </button>
-                  <button
-                    onClick={() => handleExport('notion')}
-                    className="flex flex-col items-center gap-3 p-4 rounded-2xl border-2 border-stone-100 hover:border-stone-200 bg-white text-stone-500 transition-all group active:scale-95"
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-white border border-stone-100 flex items-center justify-center">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                        <line x1="3" y1="9" x2="21" y2="9"></line>
-                        <line x1="9" y1="21" x2="9" y2="9"></line>
-                      </svg>
-                    </div>
-                    <span className="text-sm font-semibold">Notion</span>
                   </button>
                   <button
                     onClick={() => handleExport('pdf')}
@@ -271,9 +246,7 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
               <p className="text-stone-400 text-sm mt-1">
                 {exportedAs === 'clipboard'
                   ? 'Content copied to clipboard.'
-                  : exportedAs.includes('Notion')
-                    ? 'Content copied to clipboard. Paste into Notion.'
-                    : `Document has been exported as ${exportedAs}.`}
+                  : `Document has been exported as ${exportedAs}.`}
               </p>
             </div>
             <button
