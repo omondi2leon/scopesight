@@ -1,4 +1,4 @@
-import Editor from '@monaco-editor/react'
+import RichTextEditor from './RichTextEditor'
 import { useStore } from '../lib/store'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -131,14 +131,14 @@ const PrdEditor = () => {
         <div
           className={clsx(
             'w-full max-w-[800px] shadow-soft rounded-lg relative border transition-all duration-500 ease-in-out print:shadow-none print:border-none print:m-0 print:p-8 print:w-full print:max-w-none',
-            isEmpty
+            isEmpty && viewMode === 'preview'
               ? 'bg-white/40 border-stone-100/50 flex flex-col items-center justify-center text-center backdrop-blur-sm min-h-[1000px] p-16'
               : 'bg-white border-stone-100'
           )}
         >
           <div className="absolute left-6 top-0 bottom-0 w-px border-l border-dashed border-stone-200 print:hidden" />
 
-          {isEmpty ? (
+          {isEmpty && viewMode === 'preview' ? (
             <div className="max-w-md space-y-4 opacity-60">
               <div className="w-20 h-20 rounded-2xl bg-stone-50 border border-stone-100 flex items-center justify-center mb-8 rotate-3 mx-auto">
                 <svg
@@ -177,27 +177,8 @@ const PrdEditor = () => {
               </div>
             </div>
           ) : (
-            <div className="relative pl-4 print:pl-0">
-              <Editor
-                height="calc(100vh - 200px)"
-                defaultLanguage="markdown"
-                value={prdContent}
-                onChange={handleEditorChange}
-                options={{
-                  minimap: { enabled: false },
-                  wordWrap: 'on',
-                  fontSize: 15,
-                  padding: { top: 64, bottom: 64 },
-                  fontFamily: 'Inter, sans-serif',
-                  scrollBeyondLastLine: false,
-                  smoothScrolling: true,
-                  lineNumbers: 'off',
-                  renderLineHighlight: 'none',
-                  overviewRulerLanes: 0,
-                  hideCursorInOverviewRuler: true
-                }}
-                className="h-full"
-              />
+            <div className="relative pl-4 print:pl-0 h-[calc(100vh-250px)] w-full">
+              <RichTextEditor content={prdContent} onChange={handleEditorChange} />
             </div>
           )}
         </div>
