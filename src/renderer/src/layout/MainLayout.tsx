@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import { useStore } from '../lib/store'
@@ -6,7 +5,6 @@ import { useStore } from '../lib/store'
 const MainLayout = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const [showNotifications, setShowNotifications] = useState(false)
   const prdHistory = useStore((s) => s.prdHistory)
 
   const navItems = [
@@ -109,61 +107,6 @@ const MainLayout = () => {
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
             System Operational
           </div>
-          <div className="relative">
-            <button
-              onClick={() => setShowNotifications(!showNotifications)}
-              className="w-10 h-10 rounded-full border border-stone-200 flex items-center justify-center hover:bg-stone-100 transition-colors text-stone-600 active:scale-95"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-              </svg>
-            </button>
-            {showNotifications && (
-              <div className="absolute right-0 top-12 w-80 bg-white border border-stone-200 rounded-2xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-4 duration-200">
-                <div className="p-4 border-b border-stone-100 flex justify-between items-center bg-stone-50/50">
-                  <h3 className="font-semibold text-stone-900">Notifications</h3>
-                  <button
-                    onClick={() => setShowNotifications(false)}
-                    className="text-xs font-semibold text-stone-500 hover:text-stone-900 transition-colors"
-                  >
-                    Mark all read
-                  </button>
-                </div>
-                <div className="p-12 flex flex-col items-center justify-center text-center bg-white">
-                  <div className="w-12 h-12 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center mb-4 text-stone-400">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                    >
-                      <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 0 0 1-3.46 0"></path>
-                    </svg>
-                  </div>
-                  <p className="text-sm font-semibold text-stone-900">You're all caught up</p>
-                  <p className="text-xs text-stone-500 mt-1">No new notifications right now.</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <button
-            onClick={() => navigate('/settings')}
-            className="w-10 h-10 rounded-full bg-stone-900 text-white flex items-center justify-center hover:bg-stone-800 transition-colors shadow-lg shadow-stone-900/10 active:scale-95"
-          >
-            <span className="text-xs font-bold">PT</span>
-          </button>
         </div>
       </header>
       <div className="flex-1 flex overflow-hidden print:overflow-visible print:block print:h-auto">

@@ -13,7 +13,9 @@ const DEFAULT_PRD_CONTENT =
 const PrdEditor = () => {
   const { prdContent, setPrdContent } = useStore()
   const [isExportOpen, setIsExportOpen] = useState(false)
-  const [viewMode, setViewMode] = useState<'preview' | 'edit'>('preview')
+  const [viewMode, setViewMode] = useState<'preview' | 'edit'>(() => {
+    return prdContent === DEFAULT_PRD_CONTENT || !prdContent ? 'edit' : 'preview'
+  })
   const previewRef = useRef<HTMLDivElement>(null)
   const prevContentRef = useRef<string>(prdContent)
 
@@ -60,6 +62,17 @@ const PrdEditor = () => {
         })
       }
       prevContentRef.current = prdContent
+    }
+  }, [prdContent, viewMode])
+
+  // Automatically switch to edit mode if the content becomes empty (e.g. after a clear)
+  useEffect(() => {
+    if ((prdContent === DEFAULT_PRD_CONTENT || !prdContent) && viewMode === 'preview') {
+      // Use requestAnimationFrame to push setState to the next frame,
+      // avoiding cascading render issues.
+      requestAnimationFrame(() => {
+        setViewMode('edit')
+      })
     }
   }, [prdContent, viewMode])
 
