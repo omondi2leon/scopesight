@@ -5,13 +5,11 @@ import { useStore } from '../lib/store'
 const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const { prdContent } = useStore()
   const [step, setStep] = useState<'options' | 'success'>('options')
-  const [exportedAs, setExportedAs] = useState('')
 
   useEffect(() => {
     if (isOpen) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setStep('options')
-      setExportedAs('')
     }
   }, [isOpen])
 
@@ -37,7 +35,6 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
       onClose()
     } else if (type === 'clipboard') {
       await navigator.clipboard.writeText(prdContent)
-      setExportedAs('clipboard')
       setStep('success')
     } else if (type === 'pdf') {
       const originalTitle = document.title
@@ -243,11 +240,7 @@ const ExportModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void
             </div>
             <div>
               <h3 className="text-2xl font-serif">Export Successful</h3>
-              <p className="text-stone-400 text-sm mt-1">
-                {exportedAs === 'clipboard'
-                  ? 'Content copied to clipboard.'
-                  : `Document has been exported as ${exportedAs}.`}
-              </p>
+              <p className="text-stone-400 text-sm mt-1">Content copied to clipboard.</p>
             </div>
             <button
               onClick={onClose}

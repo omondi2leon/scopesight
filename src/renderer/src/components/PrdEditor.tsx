@@ -1,14 +1,11 @@
 import RichTextEditor from './RichTextEditor'
-import { useStore } from '../lib/store'
+import { useStore, DEFAULT_PRD_CONTENT } from '../lib/store'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import clsx from 'clsx'
 import { useState, useRef, useEffect } from 'react'
 import { diffLines } from 'diff'
 import ExportModal from './ExportModal'
-
-const DEFAULT_PRD_CONTENT =
-  '# Product Requirements Document\n\n## 1. Introduction\n\n## 2. Problem Statement\n\n## 3. Goals and Objectives\n\n## 4. User Stories\n\n## 5. Technical Requirements\n\n'
 
 const PrdEditor = () => {
   const { prdContent, setPrdContent } = useStore()
