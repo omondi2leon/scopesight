@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useStore } from '../lib/store'
 import { sendMessage } from '../services'
-import { Send, Loader2 } from 'lucide-react'
+import { Send, Loader2, Trash2 } from 'lucide-react'
 import { diffWords } from 'diff'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
@@ -17,7 +17,8 @@ const ChatPanel = () => {
     setPrdContent,
     addPrdVersion,
     selectedModel,
-    setSelectedModel
+    setSelectedModel,
+    clearChat
   } = useStore()
   const navigate = useNavigate()
   const [input, setInput] = useState('')
@@ -31,6 +32,17 @@ const ChatPanel = () => {
   const handleSend = async (manualContent?: string) => {
     const messageContent = manualContent || input
     const hasAnyKey = Object.values(apiKeys).some((k) => !!k)
+
+    if (messageContent === 'Clear Conversation') {
+      clearChat()
+      addChatMessage(
+        'system',
+        'Conversation history cleared. The current PRD remains the source of truth for new messages.'
+      )
+      setInput('')
+      return
+    }
+
     if (!messageContent.trim() || !hasAnyKey) return
 
     setInput('')
@@ -73,11 +85,25 @@ const ChatPanel = () => {
 
         setPrdContent(response.content)
         addChatMessage('assistant', 'I have updated the PRD based on your feedback.')
+      } else if (response.content === 'CONTEXT_LIMIT_REACHED') {
+        addChatMessage(
+          'system',
+          'The AI conversation has reached its context limit. Please clear the conversation to continue. Your current PRD content will be preserved.',
+          ['Clear Conversation']
+        )
       } else {
         addChatMessage('system', `Error: ${response.content}`)
       }
-    } catch (error) {
-      addChatMessage('system', 'Failed to communicate with AI.')
+    } catch (error: any) {
+      if (error.message === 'CONTEXT_LIMIT_REACHED') {
+        addChatMessage(
+          'system',
+          'The AI conversation has reached its context limit. Please clear the conversation to continue. Your current PRD content will be preserved.',
+          ['Clear Conversation']
+        )
+      } else {
+        addChatMessage('system', 'Failed to communicate with AI.')
+      }
     } finally {
       setIsLoading(false)
     }
@@ -342,17 +368,38 @@ const ChatPanel = () => {
                   </span>
                 )}
               </div>
-              <button
-                onClick={() => handleSend()}
-                disabled={!Object.values(apiKeys).some((k) => !!k) || isLoading || !input.trim()}
-                className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
-              >
-                {isLoading ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                ) : (
-                  <Send className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-2">
+                {chatHistory.length > 0 && (
+                  <button
+                    onClick={() => {
+                      if (
+                        window.confirm(
+                          'Are you sure you want to clear the conversation history? The current PRD content will be preserved.'
+                        )
+                      ) {
+                        clearChat()
+                        addChatMessage('system', 'Conversation history cleared.')
+                      }
+                    }}
+                    disabled={isLoading}
+                    className="w-8 h-8 rounded-full bg-stone-100 text-stone-400 flex items-center justify-center hover:bg-stone-200 hover:text-stone-600 active:scale-95 transition-all disabled:opacity-50"
+                    title="Clear Conversation"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
                 )}
-              </button>
+                <button
+                  onClick={() => handleSend()}
+                  disabled={!Object.values(apiKeys).some((k) => !!k) || isLoading || !input.trim()}
+                  className="w-8 h-8 rounded-full bg-stone-900 text-white flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-md disabled:opacity-50 disabled:hover:scale-100"
+                >
+                  {isLoading ? (
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  ) : (
+                    <Send className="w-3.5 h-3.5" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

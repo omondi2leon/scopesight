@@ -70,6 +70,15 @@ export const sendMessageToDeepseek = async (
       const errorData = await response.json().catch(() => null)
       const errorMessage =
         errorData?.error?.message || `API request failed with status ${response.status}`
+
+      if (
+        errorMessage.includes('context_length_exceeded') ||
+        errorMessage.includes('max_tokens') ||
+        (response.status === 400 && errorMessage.includes('token'))
+      ) {
+        return { type: 'error', content: 'CONTEXT_LIMIT_REACHED' }
+      }
+
       return { type: 'error', content: errorMessage }
     }
 

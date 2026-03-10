@@ -25,19 +25,29 @@ If you have enough information to update the PRD, respond with a JSON object:
 IMPORTANT: Respond ONLY with the JSON object.
 `
 
-  const response = await anthropic.messages.create({
-    model,
-    max_tokens: 4096,
-    system: systemMessage,
-    messages: messages
-      .filter((m) => m.role !== 'system')
-      .map((m) => ({
-        role: m.role === 'assistant' ? 'assistant' : ('user' as any),
-        content: m.content
-      }))
-  })
+  try {
+    const response = await anthropic.messages.create({
+      model,
+      max_tokens: 4096,
+      system: systemMessage,
+      messages: messages
+        .filter((m) => m.role !== 'system')
+        .map((m) => ({
+          role: m.role === 'assistant' ? 'assistant' : ('user' as any),
+          content: m.content
+        }))
+    })
 
-  const content = (response.content[0] as any).text
-  if (!content) throw new Error('Empty response from Anthropic')
-  return JSON.parse(content)
+    const content = (response.content[0] as any).text
+    if (!content) throw new Error('Empty response from Anthropic')
+    return JSON.parse(content)
+  } catch (error: any) {
+    if (
+      error.status === 400 &&
+      (error.message?.includes('max_tokens') || error.message?.includes('context'))
+    ) {
+      throw new Error('CONTEXT_LIMIT_REACHED')
+    }
+    throw error
+  }
 }

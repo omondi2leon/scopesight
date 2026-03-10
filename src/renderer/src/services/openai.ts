@@ -23,16 +23,23 @@ If you have enough information to update the PRD, respond with a JSON object:
 { "type": "update", "content": "The FULL updated PRD in markdown format" }
 `
 
-  const response = await openai.chat.completions.create({
-    model,
-    messages: [
-      { role: 'system', content: systemMessage },
-      ...messages.map((m) => ({ role: m.role as any, content: m.content }))
-    ],
-    response_format: { type: 'json_object' }
-  })
+  try {
+    const response = await openai.chat.completions.create({
+      model,
+      messages: [
+        { role: 'system', content: systemMessage },
+        ...messages.map((m) => ({ role: m.role as any, content: m.content }))
+      ],
+      response_format: { type: 'json_object' }
+    })
 
-  const content = response.choices[0].message.content
-  if (!content) throw new Error('Empty response from OpenAI')
-  return JSON.parse(content)
+    const content = response.choices[0].message.content
+    if (!content) throw new Error('Empty response from OpenAI')
+    return JSON.parse(content)
+  } catch (error: any) {
+    if (error.status === 400 && error.code === 'context_length_exceeded') {
+      throw new Error('CONTEXT_LIMIT_REACHED')
+    }
+    throw error
+  }
 }

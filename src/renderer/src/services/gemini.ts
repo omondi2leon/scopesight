@@ -29,20 +29,30 @@ IMPORTANT: Respond ONLY with the JSON object.
     }
   })
 
-  const chat = geminiModel.startChat({
-    history: messages
-      .filter((m) => m.role !== 'system')
-      .map((m) => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }]
-      }))
-  })
+  try {
+    const chat = geminiModel.startChat({
+      history: messages
+        .filter((m) => m.role !== 'system')
+        .map((m) => ({
+          role: m.role === 'assistant' ? 'model' : 'user',
+          parts: [{ text: m.content }]
+        }))
+    })
 
-  // Get the last message from the input messages as the prompt
-  const lastMessage = messages[messages.length - 1].content
-  const result = await chat.sendMessage(lastMessage)
-  const response = await result.response
-  const content = response.text()
-  if (!content) throw new Error('Empty response from Gemini')
-  return JSON.parse(content)
+    // Get the last message from the input messages as the prompt
+    const lastMessage = messages[messages.length - 1].content
+    const result = await chat.sendMessage(lastMessage)
+    const response = await result.response
+    const content = response.text()
+    if (!content) throw new Error('Empty response from Gemini')
+    return JSON.parse(content)
+  } catch (error: any) {
+    if (
+      error.message?.includes('400') &&
+      (error.message?.includes('token') || error.message?.includes('context'))
+    ) {
+      throw new Error('CONTEXT_LIMIT_REACHED')
+    }
+    throw error
+  }
 }
