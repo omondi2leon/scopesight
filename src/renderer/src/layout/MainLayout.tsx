@@ -83,6 +83,28 @@ const MainLayout = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          <button
+            onClick={() => {
+              useStore.getState().createNewDraft()
+              navigate('/editor')
+            }}
+            className="hidden lg:flex items-center gap-2 px-5 py-1.5 bg-stone-900 text-white rounded-full text-sm font-medium shadow-lg shadow-stone-900/10 hover:bg-stone-800 transition-all active:scale-95"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            New PRD
+          </button>
           <div className="hidden lg:flex items-center gap-2 text-xs font-medium text-stone-400 px-3 py-1 bg-stone-100 rounded-lg border border-stone-200">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
             System Operational
