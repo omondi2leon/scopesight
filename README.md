@@ -4,6 +4,17 @@
 
 ScopeSight is a desktop application that helps product managers and teams create professional PRDs through conversational AI. Your data stays entirely on your machine — no cloud accounts, no subscriptions, no data collection.
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="resources/screenshots/screenshot-1.png" width="48%" />
+  <img src="resources/screenshots/screenshot-3.png" width="48%" />
+</p>
+<p align="center">
+  <img src="resources/screenshots/screenshot-4.png" width="48%" />
+  <img src="resources/screenshots/screenshot-2.png" width="48%" />
+</p>
+
 ## ✨ Features
 
 - **Multi-Provider AI** — Supports **DeepSeek**, **OpenAI (GPT-4o)**, **Anthropic (Claude)**, and **Google Gemini**. Switch between models on the fly.
