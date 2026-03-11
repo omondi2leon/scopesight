@@ -15,28 +15,37 @@ ScopeSight is a desktop application that helps product managers and teams create
 - **Encrypted API Keys** — Your provider API keys are encrypted using your OS's native secure storage (macOS Keychain / Windows Credential Manager).
 - **100% Local & Private** — No sign-up, no cloud sync. Everything runs and saves on your computer.
 
-## 📦 Download
+## 📥 Installation
 
-Head to the [**Releases**](https://github.com/omondi2leon/scopesight/releases) page and download the latest installer:
+Head to the [**Releases**](https://github.com/omondi2leon/scopesight/releases) page and download the latest installer for your system:
 
 | Platform | File                         |
 | -------- | ---------------------------- |
 | macOS    | `ScopeSight-x.x.x.dmg`       |
 | Windows  | `ScopeSight-x.x.x-setup.exe` |
 
-### Troubleshooting macOS ("App is damaged" error)
+### macOS (Apple Silicon & Intel)
 
-Because the app is not currently signed with an Apple Developer certificate, macOS Gatekeeper (especially on Apple Silicon) may flag the downloaded app as "damaged and can't be opened." You can quickly fix this by removing the quarantine flag and forcing a local ad-hoc signature. 
+Because this application is not currently distributed through the Mac App Store or signed with a paid Apple Developer certificate, macOS Gatekeeper will initially prevent it from opening. Please follow these exact steps to install and run the app:
 
-Run these commands in your terminal (assuming you dragged the app to your `Applications` folder):
+1. Download the `.dmg` and drag **ScopeSight.app** into your **Applications** folder.
+2. **Crucial Step:** Open your `Terminal` app and run these two commands exactly as written. This removes the download quarantine and generates a local, trusted signature on your Mac so the app can run:
 
-```bash
-# 1. Remove the quarantine attribute
-sudo xattr -cr /Applications/ScopeSight.app
+   ```bash
+   sudo xattr -cr /Applications/ScopeSight.app
+   sudo codesign --force --deep --sign - /Applications/ScopeSight.app
+   ```
+   *(You will be asked to enter your Mac password. You won't see the characters as you type, just press Enter when done).*
 
-# 2. Force a deep ad-hoc signature
-sudo codesign --force --deep --sign - /Applications/ScopeSight.app
-```
+3. **First Launch:** Go to your Applications folder, **Right-Click** (or Control-click) on ScopeSight, and select **Open**. If you see a warning prompt, click **Open** again.
+
+#### 🔐 "Safe Storage" Keychain Prompt
+When you first open the app, macOS may show a prompt saying **"ScopeSight wants to use your confidential information stored in 'scopesight Safe Storage' in your keychain."**
+
+This is completely normal and secure. The app uses Electron's native `safeStorage` API to securely encrypt sensitive data (like your local settings or API keys) on your device. 
+
+**What to do:**
+Enter your standard Mac login password and click **Always Allow**. You will not be prompted for this again.
 
 ## 🛠 Development
 
