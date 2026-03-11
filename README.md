@@ -26,12 +26,16 @@ Head to the [**Releases**](https://github.com/omondi2leon/scopesight/releases) p
 
 ### Troubleshooting macOS ("App is damaged" error)
 
-Because the app is not currently signed with an Apple Developer certificate, macOS Gatekeeper (especially on Apple Silicon) may flag the downloaded app as "damaged and can't be opened." You can quickly fix this by removing the quarantine flag. 
+Because the app is not currently signed with an Apple Developer certificate, macOS Gatekeeper (especially on Apple Silicon) may flag the downloaded app as "damaged and can't be opened." You can quickly fix this by removing the quarantine flag and forcing a local ad-hoc signature. 
 
-Run this command in your terminal (assuming you dragged the app to your `Applications` folder):
+Run these commands in your terminal (assuming you dragged the app to your `Applications` folder):
 
 ```bash
+# 1. Remove the quarantine attribute
 sudo xattr -cr /Applications/ScopeSight.app
+
+# 2. Force a deep ad-hoc signature
+sudo codesign --force --deep --sign - /Applications/ScopeSight.app
 ```
 
 ## 🛠 Development
