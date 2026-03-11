@@ -19,9 +19,9 @@ ScopeSight is a desktop application that helps product managers and teams create
 
 Head to the [**Releases**](https://github.com/omondi2leon/scopesight/releases) page and download the latest installer:
 
-| Platform | File |
-|----------|------|
-| macOS    | `ScopeSight-x.x.x.dmg` |
+| Platform | File                         |
+| -------- | ---------------------------- |
+| macOS    | `ScopeSight-x.x.x.dmg`       |
 | Windows  | `ScopeSight-x.x.x-setup.exe` |
 
 ## 🛠 Development
@@ -74,17 +74,17 @@ Build output will be in the `dist/` directory.
 
 ## 🏗 Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | Electron + electron-vite |
-| Frontend | React 19 + TypeScript |
-| Styling | Tailwind CSS v4 |
-| Editor | Monaco Editor |
-| State | Zustand |
-| Database | Dexie (IndexedDB) |
-| AI SDKs | OpenAI, Anthropic, Google Generative AI |
-| Build | electron-builder |
-| CI/CD | GitHub Actions |
+| Layer     | Technology                              |
+| --------- | --------------------------------------- |
+| Framework | Electron + electron-vite                |
+| Frontend  | React 19 + TypeScript                   |
+| Styling   | Tailwind CSS v4                         |
+| Editor    | Monaco Editor                           |
+| State     | Zustand                                 |
+| Database  | Dexie (IndexedDB)                       |
+| AI SDKs   | OpenAI, Anthropic, Google Generative AI |
+| Build     | electron-builder                        |
+| CI/CD     | GitHub Actions                          |
 
 ## 🔒 Privacy & Security
 
